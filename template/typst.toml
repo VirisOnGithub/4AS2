@@ -1,0 +1,7 @@
+[package]
+name = "polytech"
+version = "1.0.0"
+entrypoint = "polytech.typ"
+authors = ["Clément RENIERS <>"]
+license = "MIT-0"
+description = "My own functions and templates for Typst."

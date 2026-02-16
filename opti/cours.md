@@ -1,0 +1,11 @@
+Transformation locale
+
+ABCDEF
+ABFEDC
+ACBDEF  
+BACDEF  
+ACBDEF  
+ABDCEF  
+ABCFED  
+ABCEDF  
+ABCDFE

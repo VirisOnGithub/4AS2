@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentations d'entreprises</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/solarized.css" id="theme">
+    <style>
+        html,
+        body {
+            font-size: 16px;
+        }
+
+        .reveal {
+            font-size: 0.9em;
+        }
+
+        .reveal h1 {
+            font-size: 2em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reveal section>h1,
+        .reveal section>h2,
+        .reveal section>p,
+        .reveal section>ol,
+        .reveal section>ul {
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo {
+            height: 50px;
+            object-fit: contain;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .title-with-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .two-col {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            align-items: stretch;
+            margin: 0 auto;
+        }
+
+        .card {
+            flex: 1 1 280px;
+            min-width: 240px;
+            max-width: 420px;
+            padding: 12px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.85);
+            box-sizing: border-box;
+            height: 100%;
+            overflow: auto;
+            text-align: left;
+        }
+
+        .small {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        .cont {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1 style="font-size: 40pt !important;">Présentation entreprises des démarches RSE</h1>
+            </section>
+
+            <section>
+                <div class="cont">
+                    <div class="title-with-logo">
+                        <img class="logo" src="Xerfi-l-intelligence-strategique.svg" alt="Logo Xerfi">
+                        <h2>Xerfi</h2>
+                    </div>
+                    <div class="two-col">
+                        <div class="card">
+                            <h3>Profil & taille</h3>
+                            <ul>
+                                <li>Institut d’études privé (intelligence stratégique)</li>
+                                <li>Équipe informatique: 3 personnes</li>
+                                <li>Dév. d’outils de scraping / big data</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Démarche RSE</h3>
+                            <ul>
+                                <li>Optimisation des requêtes LLM</li>
+                                <li>Requêtes en batch pour limiter les appels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="cont">
+                    <div class="title-with-logo">
+                        <img class="logo" src="arcus_logo_horizontal_rgb_215x215.png" alt="Logo Arcus ASBL">
+                        <h2>Arcus ASBL</h2>
+                    </div>
+                    <div class="two-col">
+                        <div class="card">
+                            <h3>Profil & taille</h3>
+                            <ul>
+                                <li>Association gouvernementale dans le social</li>
+                                <li>~1800 employés</li>
+                                <li>DSI: 12 personnes, équipes par champs de travail</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Démarche RSE</h3>
+                            <ul>
+                                <li>Pas de démarche RSE identifiée</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="cont">
+                    <div class="title-with-logo">
+                        <img class="logo" src="atos.png" alt="Logo Atos">
+                        <h2>Atos (Rennes)</h2>
+                    </div>
+                    <div class="two-col">
+                        <div class="card">
+                            <h3>Profil & taille</h3>
+                            <ul>
+                                <li>ESN française (groupe européen)</li>
+                                <li>~70 000 employés monde</li>
+                                <li>Agence Rennes: ~120 employés, équipe ~10</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>RSE & éco‑conception</h3>
+                            <ul>
+                                <li>Réduction dépendances, logs, données & interactions DB</li>
+                                <li>Code réactif, pipelines utilisant conteneurs Docker</li>
+                                <li>Choix technos adaptées (React), tests de vie légers</li>
+                                <li>Gestion fine des tenants/pods</li>
+                                <li>Au niveau groupe: objectif réduction GES, SBTi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="cont">
+                    <div class="title-with-logo">
+                        <img class="logo" src="cegedim.png" alt="Logo Cegedim">
+                        <h2>Cegedim Service Center (Bucarest)</h2>
+                    </div>
+                    <div class="two-col">
+                        <div class="card">
+                            <h3>Profil & taille</h3>
+                            <ul>
+                                <li>Branche roumaine de Cegedim France</li>
+                                <li>~400 employés (Bucarest)</li>
+                                <li>Département CDS, équipe SRH+ (~10)</li>
+                                <li>Dev & debug fonctionnalités d’app RH multi‑clients</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h3>Démarche RSE</h3>
+                            <ul>
+                                <li>Partenariats Éducatifs : Collaboration renforcée avec l'Université POLITEHNICA de
+                                    Bucarest et l'Institut Français.</li>
+                                <li>Insertion Professionnelle : Organisation de la « Cegedim Academy », proposant des
+                                    stages d'été aux étudiants.</li>
+                                <li>Bien-être Salarié : Organisation du challenge sportif « Fun Olympics » pour les
+                                    collaborateurs.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script>
+        const deck = new Reveal({
+            hash: true
+        });
+        deck.initialize();
+    </script>
+</body>
+
+</html>
