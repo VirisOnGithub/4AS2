@@ -12,6 +12,15 @@ pub struct ClientSession {
     has_entered_username: bool,
 }
 
+fn read_length_prefixed_payload(stream: &mut TcpStream) -> io::Result<Vec<u8>> {
+    let mut len_buf = [0u8; 4];
+    stream.read_exact(&mut len_buf)?;
+    let payload_len = u32::from_be_bytes(len_buf) as usize;
+    let mut payload = vec![0u8; payload_len];
+    stream.read_exact(&mut payload)?;
+    Ok(payload)
+}
+
 pub fn write_to_server(mut s: TcpStream, message: &str) {
     use std::io::Write;
     let message = format!("{}\n", message);
@@ -113,19 +122,24 @@ impl ClientSession {
                         println!("Server response: {}", r);
                         if r.starts_with("150") {
                             if let Some(data_stream) = &mut self.data_socket {
-                                let mut data_reader = BufReader::new(data_stream);
-                                let mut data_response = String::new();
-                                data_reader
-                                    .read_to_string(&mut data_response)
+                                let data_response = read_length_prefixed_payload(data_stream)
+                                    .map(|data| String::from_utf8_lossy(&data).to_string())
                                     .expect("Failed to read from data socket");
-                                println!("Directory listing:\n{}", data_response);
-                                for line in data_response.split(";") {
-                                    println!("{}", line);
+                                // println!("Directory listing:\n{}", data_response);
+                                let dir: Vec<&str> = data_response.split(";").collect();
+                                let max_length = dir.iter().map(|s| s.len()).max().unwrap_or(0);
+                                println!("+{}+", "-".repeat(max_length + 2));
+                                for line in dir {
+                                    println!("| {}{} |", line, " ".repeat(max_length - line.len()));
                                 }
+                                println!("+{}+", "-".repeat(max_length + 2));
                             } else {
                                 eprintln!("Data socket not established.");
                             }
                         }
+                    }
+                    if let Some(r) = get_server_reponse(stream) {
+                        println!("Server response: {}", r);
                     }
                 }
                 Commands::Cwd(_) => {
@@ -134,6 +148,9 @@ impl ClientSession {
                         return;
                     }
                     write_to_server(stream.try_clone().unwrap(), input);
+                    if let Some(r) = get_server_reponse(stream) {
+                        println!("Server response: {}", r);
+                    }
                 }
                 Commands::Retr(file_name) => {
                     if !self.authenticated {
@@ -149,9 +166,8 @@ impl ClientSession {
                         println!("Server response: {}", r);
                         if r.starts_with("150") {
                             if let Some(data_stream) = &mut self.data_socket {
-                                let mut data_reader = BufReader::new(data_stream);
-                                let mut file_data = Vec::new();
-                                data_reader.read_to_end(&mut file_data).unwrap_or(0);
+                                let file_data = read_length_prefixed_payload(data_stream)
+                                    .expect("Failed to read from data socket");
                                 let mut local_file = std::fs::File::create(&file_name)
                                     .expect("Failed to create local file");
                                 local_file
@@ -162,6 +178,9 @@ impl ClientSession {
                                 eprintln!("Data socket not established.");
                             }
                         }
+                    }
+                    if let Some(r) = get_server_reponse(stream) {
+                        println!("Server response: {}", r);
                     }
                 }
                 Commands::Quit => {
@@ -182,7 +201,6 @@ impl ClientSession {
         match std::net::TcpStream::connect(&address) {
             Ok(stream) => {
                 println!("Connected to server at {}", address);
-                let mut reader = BufReader::new(&stream);
 
                 loop {
                     print!("C>");

@@ -176,7 +176,7 @@
     $phi_(i k)$ est la composante de la donnée $i$ sur l'axe $k$
 
     => Qualité de la représentation
-    $ cos^2(u_k, i) = phi_(i k)^2 / sum_j phi_(i j)^2 $
+    $ cos^2(u_k, i) = phi_(i k)^2 / (sum_j phi_(i j)^2) $
     Réprésente la qualité de la représentation de la donnée $i$ sur l'axe $k$
   ]
 

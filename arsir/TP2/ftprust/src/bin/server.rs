@@ -35,18 +35,21 @@ struct FtpServer {
     authenticated: bool,
     authorized_users: Vec<(String, String)>,
     data_socket: Option<TcpStream>,
+    base_cwd: PathBuf,
     cwd: PathBuf,
 }
 
 impl FtpServer {
     fn new(stream: TcpStream) -> Self {
+        let cwd = std::env::current_dir().unwrap().join("../Data");
         FtpServer {
             stream,
             user: None,
             authenticated: false,
             authorized_users: vec![("foo".to_string(), "bar".to_string())],
             data_socket: None,
-            cwd: std::env::current_dir().unwrap(),
+            base_cwd: cwd.clone(),
+            cwd,
         }
     }
 
@@ -79,6 +82,13 @@ impl FtpServer {
                 Commands::User(username) => {
                     if self.authorized_users.iter().any(|(u, _)| u == &username) {
                         self.user = Some(username.clone());
+                        // création du dossier user si pas déjà existant
+                        let user_dir = self.cwd.join(&username);
+                        if !user_dir.exists() {
+                            if let Err(e) = std::fs::create_dir_all(&user_dir) {
+                                eprintln!("Failed to create user directory: {}", e);
+                            }
+                        }
                         send_to_client(&mut self.stream, "331 Username OK, need password");
                     } else {
                         send_to_client(&mut self.stream, "530 Invalid username");
@@ -92,6 +102,8 @@ impl FtpServer {
                             .any(|(u, p)| u == user && p == &passwd)
                         {
                             self.authenticated = true;
+                            self.cwd = std::fs::canonicalize(self.base_cwd.join(user)).unwrap();
+                            self.base_cwd = self.cwd.clone();
                             send_to_client(&mut self.stream, "230 User logged in");
                         } else {
                             send_to_client(&mut self.stream, "530 Invalid password");
@@ -150,13 +162,14 @@ impl FtpServer {
                             .map(|entry| entry.file_name().into_string().unwrap_or_default())
                             .collect::<Vec<String>>()
                             .join(";");
-                        if let Err(e) = data_socket.write_all(listing.as_bytes()) {
+                        let listing_bytes = listing.as_bytes();
+                        let listing_len = listing_bytes.len() as u32;
+                        if let Err(e) = data_socket.write_all(&listing_len.to_be_bytes()) {
+                            eprintln!("Failed to send directory length: {}", e);
+                        }
+                        if let Err(e) = data_socket.write_all(listing_bytes) {
                             eprintln!("Failed to send directory listing: {}", e);
                         }
-                        if let Err(e) = data_socket.shutdown(std::net::Shutdown::Both) {
-                            eprintln!("Failed to close data connection: {}", e);
-                        }
-                        self.data_socket = None;
                         send_to_client(&mut self.stream, "226 Directory send OK");
                     } else {
                         send_to_client(
@@ -170,9 +183,19 @@ impl FtpServer {
                         send_to_client(&mut self.stream, "530 Please login first");
                         return;
                     }
-                    std::env::set_current_dir(&new_dir).unwrap_or_else(|_| {
+                    let new_path = self.cwd.join(new_dir);
+                    println!("Attempting to change directory to: {}", new_path.display());
+                    println!("Base directory: {}", self.base_cwd.display());
+                    if new_path.is_dir()
+                        && std::fs::canonicalize(&new_path)
+                            .unwrap()
+                            .starts_with(&self.base_cwd)
+                    {
+                        self.cwd = new_path;
+                        send_to_client(&mut self.stream, "250 Directory successfully changed");
+                    } else {
                         send_to_client(&mut self.stream, "550 Failed to change directory");
-                    });
+                    }
                 }
                 Commands::Retr(filename) => {
                     if !self.authenticated {
@@ -187,28 +210,23 @@ impl FtpServer {
                         return;
                     }
                     send_to_client(&mut self.stream, "150 Opening data connection");
-                    std::fs::read_to_string(self.cwd.join(filename))
-                        .map_err(|_| {
-                            send_to_client(&mut self.stream, "550 Failed to read file");
-                        })
-                        .and_then(|content| {
+                    match std::fs::read(self.cwd.join(filename)) {
+                        Ok(content) => {
                             if let Some(ref mut data_socket) = self.data_socket {
-                                data_socket
-                                    .write_all(content.as_bytes())
-                                    .map_err(|e| eprintln!("Failed to send file: {}", e))
-                            } else {
-                                Err(())
+                                let content_len = content.len() as u32;
+                                if let Err(e) = data_socket.write_all(&content_len.to_be_bytes()) {
+                                    eprintln!("Failed to send file length: {}", e);
+                                }
+                                if let Err(e) = data_socket.write_all(&content) {
+                                    eprintln!("Failed to send file: {}", e);
+                                }
                             }
-                        })
-                        .unwrap_or_else(|_| {
-                            send_to_client(&mut self.stream, "550 Failed to retrieve file");
-                        });
-                    if let Some(ref mut data_socket) = self.data_socket {
-                        if let Err(e) = data_socket.shutdown(std::net::Shutdown::Both) {
-                            eprintln!("Failed to close data connection: {}", e);
+                        }
+                        Err(_) => {
+                            send_to_client(&mut self.stream, "550 Failed to read file");
+                            return;
                         }
                     }
-                    self.data_socket = None;
                     send_to_client(&mut self.stream, "226 Transfer complete");
                 }
                 Commands::Quit => {
