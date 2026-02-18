@@ -18,6 +18,9 @@ impl<A: Copy> Matrix<A> {
     where
         A: std::ops::Mul<Output = A> + std::ops::Add<Output = A> + Default + Copy,
     {
+        if self.data[0].len() != other.data.len() {
+            panic!("Incompatible dimensions for multiplication");
+        }
         let mut result = vec![vec![A::default(); other.data[0].len()]; self.data.len()];
         for i in 0..self.data.len() {
             for j in 0..other.data[0].len() {
@@ -33,6 +36,15 @@ impl<A: Copy> Matrix<A> {
     where
         A: std::ops::Add<Output = A> + Copy,
     {
+        if self.data.len() != other.data.len() || self.data[0].len() != other.data[0].len() {
+            panic!(
+                "Matrices must have the same dimensions for addition\nself: {}x{}, other: {}x{}",
+                self.data.len(),
+                self.data[0].len(),
+                other.data.len(),
+                other.data[0].len()
+            );
+        }
         let result = self
             .data
             .iter()
@@ -43,6 +55,18 @@ impl<A: Copy> Matrix<A> {
                     .map(|(item1, item2)| *item1 + *item2)
                     .collect()
             })
+            .collect();
+        Matrix::new(result)
+    }
+
+    pub fn scalar_mul(&self, scalar: f32) -> Matrix<f32>
+    where
+        A: std::ops::Mul<f32, Output = f32> + Copy,
+    {
+        let result = self
+            .data
+            .iter()
+            .map(|row| row.iter().map(|item| *item * scalar).collect())
             .collect();
         Matrix::new(result)
     }

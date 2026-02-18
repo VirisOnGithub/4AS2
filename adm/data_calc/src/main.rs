@@ -19,6 +19,8 @@ fn main() {
     let a1 = data.extract_from_group(1);
     let a2 = data.extract_from_group(2);
 
+    println!("Exercise 1");
+
     println!("1. Gravity center:");
     println!("\tg(E)  = {:?}", data.gravity_center());
     println!("\tg(A1) = {:?}", a1.gravity_center());
@@ -57,4 +59,19 @@ fn main() {
     println!("7. Inertia following (1, -1)");
     let direction = (1.0, -1.0);
     println!("I_b = {}", data.inertia_following(direction));
+
+    println!("Exercise 2");
+
+    let mat = Matrix::new(vec![
+        vec![1.0, 0.0, -1.0],
+        vec![0.0, 1.0, -1.0],
+        vec![-1.0, 1.0, 0.0],
+        vec![0.0, -1.0, 1.0],
+        vec![-1.0, 0.0, 1.0],
+        vec![1.0, -1.0, 0.0],
+    ]);
+
+    let v = e2q1(&mat);
+
+    println!("1. V = 1/6*\n{}", v.scalar_mul(6.0));
 }

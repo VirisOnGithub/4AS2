@@ -173,3 +173,21 @@ impl DataCalc {
 fn sq_distance(vector: (f32, f32), point: (f32, f32)) -> f32 {
     (vector.0 - point.0).powi(2) + (vector.1 - point.1).powi(2)
 }
+
+pub fn e2q1(matrix: &Matrix<f32>) -> Matrix<f32> {
+    let mat_len = matrix.data.len();
+    matrix
+        .data
+        .iter()
+        .map(|r| {
+            let r_vec = Matrix::new(vec![r.clone()]);
+            r_vec
+                .transpose()
+                .multiply(&r_vec)
+                .scalar_mul(1.0 / mat_len as f32)
+        })
+        .fold(
+            Matrix::new(vec![vec![0.0; matrix.data[0].len()]; matrix.data[0].len()]),
+            |acc, m| acc.add(&m),
+        )
+}
