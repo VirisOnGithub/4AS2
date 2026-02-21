@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+public class ReaderPausedState implements ReaderState {
 
-public class ReaderPausedState {
+    @Override
+    public void pressButton(Reader r) {
+        System.out.println("Reader playing");
+        r.setState(new ReaderPlayingState());
+    }
 }

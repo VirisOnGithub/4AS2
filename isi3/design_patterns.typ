@@ -1,5 +1,11 @@
 #import "../template/polytech.typ": *;
 
+#let principia(..content) = grid(
+  columns: (1fr, 1fr),
+  column-gutter: 20pt,
+  ..content.pos(),
+)
+
 #show: conf(doctitle: "Design Patterns", subject: "ISI3", theme: rgb("#079452"))[
   #titlepage(
     authors: "Clément RENIERS",
@@ -9,8 +15,7 @@
 
   === Principe
 
-  #grid(
-    columns: (1fr, 1fr),
+  #principia(
     [
       => On dépend des classes abstraites, rajouter une stratégie ne change rien au code.
 
@@ -91,8 +96,7 @@
 
   === Principe
 
-  #grid(
-    columns: (1fr, 1fr),
+  #principia(
     [
       => Sert dans le cas d'une classe qui doit avoir un comportement différent selon les états dans lesquels elle se trouve.
 
@@ -162,8 +166,7 @@
 
   === Principe
 
-  #grid(
-    columns: (1fr, 1fr),
+  #principia(
     [
       => Permet à un sujet de notifier ses observateurs lorsqu'il change d'état. Les observateurs peuvent alors réagir à ce changement.
 
@@ -234,4 +237,139 @@
       }
     ```,
   )
+
+  = Singleton
+
+  === Principe
+
+  #principia(
+    [
+      => Permet de s'assurer qu'une classe n'a qu'une seule instance et de fournir un point d'accès global à cette instance.
+
+      => Utilisé pour les ressources partagées, les gestionnaires de configuration, etc.
+    ],
+    rounded-image(image("/assets/image-4.png"), caption: "Utilisation simple du pattern Singleton"),
+  )
+
+  === Exemple
+
+  ```java
+  public final class Singleton {
+      private static Singleton instance;
+      public String value;
+
+      // Constructeur privé
+      private Singleton(String value) {
+          try {
+              Thread.sleep(1000);
+          } catch (InterruptedException ex) {
+              ex.printStackTrace();
+          }
+          this.value = value;
+      }
+
+      // Initialisation à la volée
+      public static Singleton getInstance(String value) {
+          if (instance == null) {
+              instance = new Singleton(value);
+          }
+          return instance;
+      }
+  }
+  ```
+
+  ```java
+  public class DemoSingleThread {
+      public static void main(String[] args) {
+          System.out.println("If you see the same value, then singleton was reused (yay!)" + "\n" +
+                  "If you see different values, then 2 singletons were created (booo!!)" + "\n\n" +
+                  "RESULT:" + "\n");
+          Singleton singleton = Singleton.getInstance("FOO");
+          Singleton anotherSingleton = Singleton.getInstance("BAR");
+          System.out.println(singleton.value);
+          System.out.println(anotherSingleton.value);
+      }
+  }
+  ```
+
+  => Dans le cas présent, le même singleton est réutilisé dans les deux cas, donc on voit la même valeur "FOO" affichée deux fois.
+
+  ```
+  If you see the same value, then singleton was reused (yay!)
+  If you see different values, then 2 singletons were created (booo!!)
+
+  RESULT:
+
+  FOO
+  FOO
+  ```
+
+  = Décorateur
+
+  === Principe
+
+  #principia(
+    [
+      => Permet d'ajouter dynamiquement des fonctionnalités à un objet sans modifier sa structure.
+
+      => Utilisé pour les flux d'entrée/sortie, les interfaces graphiques, etc.
+
+      => Là où l'héritage est statique, le décorateur permet d'ajouter des fonctionnalités de manière dynamique.
+
+      => On ne peut hériter que d'une seule classe, mais on peut décorer un objet avec plusieurs décorateurs.
+    ],
+    rounded-image(image("/assets/image-5.png"), caption: "Utilisation simple du pattern Décorateur"),
+  )
+
+  === Exemple
+
+  ```java
+  // Interface abstraite
+  abstract class DataSource {
+    String fetchData();
+  }
+
+  // Classe concrète
+  class FileDataSource implements DataSource {
+    @Override
+    String fetchData() {
+      return "Hello, World!"; // => Simulation d'une lecture de fichier
+    }
+  }
+
+  // Décorateur de base
+  class DataSourceDecorator implements DataSource {
+    final DataSource _wrappee;
+    DataSourceDecorator(this._wrappee);
+
+    @Override
+    String fetchData() {
+      return _wrappee.fetchData(); // On ne change rien, la modification est faite dans les décorateurs concrets
+    }
+  }
+
+  // Décorateur 1 : Loggeur
+  class LoggingDecorator extends DataSourceDecorator {
+    LoggingDecorator(DataSource wrappee) : super(wrappee);
+
+    @Override
+    String fetchData() {
+      print("[Logging] About to fetch data...");
+      String data = super.fetchData();
+      print("[Logging] Fetched data: $data");
+      return data;
+    }
+  }
+
+  // Décorateur 2 : Transformateur de données
+  class UppercaseDecorator extends DataSourceDecorator {
+    UppercaseDecorator(DataSource wrappee) : super(wrappee);
+
+    @Override-
+    String fetchData() {
+      String data = super.fetchData();
+      return data.toUpperCase(); // met en majuscules
+    }
+  }
+  ```
 ]

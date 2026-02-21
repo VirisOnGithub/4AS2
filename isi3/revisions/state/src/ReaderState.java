@@ -1,4 +1,3 @@
-package PACKAGE_NAME;
-
-public class ReaderState {
+public interface ReaderState {
+    void pressButton(Reader r);
 }
