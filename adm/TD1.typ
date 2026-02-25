@@ -27,21 +27,34 @@
 
   Ainsi $G = mat(1, 1; 3, 3)$
 
-  2. $hat(X)_(i,j) = X_(i,j) - g_j$, donc $ hat(X) = mat(1, -2; -2, -1; -1, -1; -2, 0; 2, 0; 0, 1; 2, 1; 0, 2) $
+  2. $hat(X)_(i,j) = X_(i,j) - g_j$, donc
+  $ hat(X) = mat(1, -2; -2, -1; -1, -1; -2, 0; 2, 0; 0, 1; 2, 1; 0, 2) $
+
+  En répétant pour les autres groupes on trouve
 
   $ hat(Y) = mat(2, -1; -1, 0; 0, 0; -1, 1) $
   $ hat(Z) = mat(1, -1; -1, 0; 1, 0; -1, 1) $
 
-  3. $T = hat(X)^T D hat(X) = hat(X)^T hat(X) =$
-
-  $W = M(A_1) + M(A_2) = mat(6, -3; -3, 2) + mat(4, -2; -2, 2) = mat(10, -5; -5, 4)$
-
-  $B = G^T D_g G = mat(-1, 1; -1, 1) mat(4, 0; 0, 4) mat(-1, -1; 1, 1) = mat(8, 8; 8, 8)$
+  3. $T = hat(X)^T D hat(X) = hat(X)^T hat(X) = mat(18, 3; 3, 12)$
 
   4.
+  $
+    W & = M(A_1) + M(A_2) \
+      & = mat(6, -3; -3, 2) + mat(4, -2; -2, 2) \
+      & = mat(10, -5; -5, 4) \
+    B & = hat(G)^T D_g hat(G) quad quad "Comment on centre ? Aucune idée" \
+      & = mat(-1, 1; -1, 1) mat(4, 0; 0, 4) mat(-1, -1; 1, 1) \
+      & = mat(8, 8; 8, 8)
+  $
 
-  5. (j'ai oublié de prendre le TD hihi)
-
+  5. Soit $u = (1, 1)$. On normalise le vecteur pour obtenir un vecteur unitaire $u' = (1/sqrt(2), 1/sqrt(2)) = 1/sqrt(2) (1, 1)$.
+  L'inertie totale supportée par la direction de coordonnées $(1, 1)$ est donc :
+  $
+    I_u (E) & = u'^T T u' \
+            & = 1/2 mat(1, 1) mat(18, 3; 3, 12) mat(1; 1) \
+            & = 1/2 mat(21, 15) mat(1; 1) \
+            & = 18
+  $
   6.
 
   $ 1/2 u^T B u = 1 / 2 mat(1, 1) mat(8, 8; 8, 8) mat(1; 1) = 16 $
@@ -49,6 +62,7 @@
   d'où
   $
     p & = (u^t B u) / (u^t W u) \
+      & = (u^t B u) / (I_u (E)) \
       & = 16 / 18 \
       & approx 0.89
   $
@@ -56,8 +70,9 @@
   7.
   $
     I_b (E) & = sum_(i=1)^n m_i dot d^2(a_i, b) \
-    & = d^2((3, 0), c) + d^2((0, 1), c) + d^2((1, 1), c) + d^2((0, 2), c) + d^2((4, 2), c) + d^2((2, 3), c) + d^2((4, 3), c) + d^2((2, 4), c) \
-    & = 110
+            & = d^2((3, 0), c) + d^2((0, 1), c) + d^2((1, 1), c) + d^2((0, 2), c) \
+     + quad & d^2((4, 2), c) + d^2((2, 3), c) + d^2((4, 3), c) + d^2((2, 4), c) \
+            & = 110
   $
 
 

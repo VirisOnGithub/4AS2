@@ -372,4 +372,142 @@
     }
   }
   ```
+
+  = Usine (Factory)
+
+  === Principe
+
+  #principia(
+    [
+      => Permet de créer des objets sans exposer la logique de création au client et en utilisant une interface commune.
+
+      => Utilisé pour les systèmes de plugins, les bibliothèques de classes, etc.
+
+      => Permet de découpler la création d'objets de leur utilisation.
+    ],
+    rounded-image(image("/assets/image-6.png"), caption: "Utilisation simple du pattern Factory"),
+  )
+
+  === Exemple (Véhicules)
+
+  ```java
+  abstract class Vehicle {
+      public abstract void printWheelNumber();
+  }
+
+  class Moto extends Vehicle {
+      public void printWheelNumber() {
+          System.out.println("2 wheels");
+      }
+  }
+
+  class Car extends Vehicle {
+      public void printWheelNumber() {
+          System.out.println("4 wheels");
+      }
+  }
+  ```
+
+  ```java
+  class VehicleFactory {
+      public static Vehicle createVehicle(String type) {
+          if (type.equalsIgnoreCase("moto")) {
+              return new Moto();
+          } else if (type.equalsIgnoreCase("car")) {
+              return new Car();
+          }
+          throw new IllegalArgumentException("Unknown vehicle type");
+      }
+  }
+  ```
+
+  => La factory est généralement un #link("#Singleton", "Singleton") pour éviter d'avoir plusieurs instances de la factory qui pourraient créer des objets de manière incohérente.
+
+  => Dans un contexte applicatif, les factories permettent aussi de créer différentes interfaces (CLI, GUI), tout en utilisant les mêmes interfaces pour les objets créés.
+
+  #pagebreak()
+
+  = Visiteur
+
+  === Principe
+  #principia(
+    [
+      => Permet de séparer un algorithme d'une structure d'objets sur laquelle il opère.
+
+      => Utilisé pour les systèmes de compilation, les systèmes de rendu, etc.
+
+      => Permet d'éviter les "switch" très gros, de baisser la complexité des algorithmes.
+    ],
+    rounded-image(image("/assets/image-7.png"), caption: "Utilisation simple du pattern Visiteur"),
+  )
+
+  === Exemple (Debug d'une figure géométrique)
+
+  ```java
+  public interface Shape {
+      // d'autres méthodes pour dessiner la figure, etc.
+      String accept(Visitor visitor);
+  }
+  ```
+
+  #grid(
+    columns: (1fr, 1fr),
+    column-gutter: 40pt,
+    ```java
+    public class Circle implements Shape {
+        private int radius;
+        private int id;
+
+        // Constructeur, getters, setters, etc.
+
+        @Override
+        public String accept(Visitor visitor) {
+            return visitor.visitCircle(this);
+        }
+    }
+    ```,
+    ```java
+    public class Dot implements Shape {
+        private int id;
+
+        // Constructeur, getters, setters, etc.
+
+        @Override
+        public String accept(Visitor visitor) {
+            return visitor.visitDot(this);
+        }
+    }
+    ```,
+  )
+
+  ```java
+  public interface Visitor {
+      // Une méthode de visite pour chaque type de figure
+      public String visitDot(Dot dot);
+      public String visitCircle(Circle circle);
+  }
+  ```
+
+  ```java
+  public class DebugVisitor implements Visitor {
+      public String visitDot(Dot d) {
+          return "Dot(id=" + d.getId() + ")";
+      }
+
+      public String visitCircle(Circle c) {
+            return "Circle(id=" + c.getId() + ", radius=" + c.getRadius() + ")";
+      }
+  }
+  ```
+
+  ```java
+  public class Main {
+      public static void main(String[] args) {
+          Shape dot = new Dot(1);
+          Shape circle = new Circle(2, 5);
+          Visitor debugVisitor = new DebugVisitor();
+          System.out.println(dot.accept(debugVisitor)); // Affiche les informations du dot
+          System.out.println(circle.accept(debugVisitor)); // Affiche les informations du cercle
+      }
+  ```
 ]

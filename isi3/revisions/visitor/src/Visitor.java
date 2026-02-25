@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
+public interface Visitor {
+    public String visitDot(Dot dot);
 
-public class Visitor {
+    public String visitCircle(Circle circle);
 }
