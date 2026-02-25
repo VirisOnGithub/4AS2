@@ -42,7 +42,7 @@
     W & = M(A_1) + M(A_2) \
       & = mat(6, -3; -3, 2) + mat(4, -2; -2, 2) \
       & = mat(10, -5; -5, 4) \
-    B & = hat(G)^T D_g hat(G) quad quad "Comment on centre ? Aucune idée" \
+    B & = hat(G)^T D_g hat(G) quad quad "On centre G par rapport à son propre centre de gravité !!" \
       & = mat(-1, 1; -1, 1) mat(4, 0; 0, 4) mat(-1, -1; 1, 1) \
       & = mat(8, 8; 8, 8)
   $

@@ -168,7 +168,7 @@
     )$
 
     => Perte d'information :
-    $ 1 - (lambda_1 + lambda_2) / sum_(j=1)^p lambda_j $
+    $ 1 - (lambda_1 + lambda_2) / (sum_(j=1)^p lambda_j) $
 
     => Contribution des données
     $ C_k(i) = phi_(i x)^2 / lambda_k $
@@ -187,4 +187,63 @@
     $ "corr"(i,j) = "cov"(i,j) / (sigma_i sigma_j) $
     $ "cov"(i, j) = 1/n sum_(k=1)^n (X_(k i) - g_i)(X_(k j) - g_j) $
   ]
+
+  = Extraction de profils à partir de connées multidimensionnelles
+
+  #block-left(title: "Classification automatique")[
+    Processus non-supervisé qui consiste à regrouper des données dans des classes, respectant :
+    - L'homogénéité (la cohésion)
+    - L'hétérogénéité (la séparation)
+  ]
+
+  #block-full(title: "Types de classification")[
+    - Approche à base de partitionnement (classification plate)
+    - Classification hiérarchique
+    - Classification à base de densité
+    - Classification à base de grilles
+    - Classification à base de modèles (réseaux de neurones)
+  ]
+
+  == Classification plate (par $K$-Moyenne)
+
+  - Les données sont représentées dans $RR^p$
+  - Les dissimilarités sont calculées par la distance euclidienne
+
+  $->$ Par définition, la $K$-Means consiste à minimiser l'inertie intra-classes
+
+  #block-full(title: "Algorithme")[
+    =Notation := On note :
+    - $E = {a_1, a_2, ..., a_n}$ l'ensemble de données dans $RR^p$
+    - $G(A)$ le centre de gravité d'une partie $A$ de $E$
+    - $I(A)$ l'inertie de $A$
+    - $I(cal(P))$ : l'inertie d'une partition $cal(P)$ de $I$
+    - $A_(alpha(i))$ : l'élément de $cal(P)$ qui contient $alpha_i$
+
+    =Initialisation :=
+    - Choisir au hasard une partition $cal(P)$ des données en $K$ classes
+
+    =Itération :=
+    - Répéter
+      - $forall A_k in cal(P)$, calculer $G(A_k)$
+      - change = faux
+      - Pour i = 1 à $n$ faire :
+        - Determiner une partie $A_k_0 in cal(P)$ telle que $d^2(a_i, G(A_k_0)) = min(d^2(G(A_k), a_i))$
+        - Si $d^2(a_i, G(A_k_0)) = d^2(G(A_(alpha(i))), a_i)$ alors
+          - $k_0 = alpha_i$
+        - $k_0 != alpha_i$ alors
+          - $A_(alpha_(i)) = A_(alpha(i)) - {a_i}$
+          - $A_k_0 = A_k_0 union {a_i}$
+          - change = vrai
+    - Jusqu'à ce que change = faux
+  ]
+
+  == Classification hiérarchique (CAH)
+
+  La CAH consiste à construire de façon itérative une suite de partitions de $E$ de telle sorte que la partition à l'étape $k$ soit issue de celle de l'étape $k-1$.
+
+  - Etape 1 : Mettre chaque donnée dans une classe $A_i$
+  $ A_i = {a_i} forall i in [|1, n|] $
+  - Etape 2 : Sélectionner les classes $A_i$ et $A_j$ les plus proches et les mettre dans la même classe $A_(n+1)$ :
+  - Etape 3 : Sélectionner les classes les plus proches pour les agréger en terme de $Delta$ (stratégie du saut minimal):
+  $ Delta(A, B) = min(d(a, b) mid(|) a in A, b in B) $
 ]
