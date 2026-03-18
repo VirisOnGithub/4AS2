@@ -26,4 +26,12 @@ public class Command {
         };
         return new Command(type, new ArrayList<>(java.util.Arrays.asList(parts).subList(1, parts.length)));
     }
+
+    public CommandType getType() {
+        return type;
+    }
+
+    public ArrayList<String> getArgs() {
+        return args;
+    }
 }

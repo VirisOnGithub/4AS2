@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *
+#import "../template/src/polytech.typ": *
 
 #show: conf(theme: blue, subject: "ISI3", doctitle: "Principes avancés de conception OO")[
   #titlepage(

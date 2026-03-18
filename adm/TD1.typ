@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *;
+#import "../template/src/polytech.typ": *;
 
 #show "=>": $=>$
 

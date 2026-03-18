@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *
+#import "../template/src/polytech.typ": *
 
 #show: conf(doctitle: "Fiche de tips", subject: "Optimisation Discrète", theme: blue)[
   #titlepage(authors: "Clément RENIERS")

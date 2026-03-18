@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *
+#import "../template/src/polytech.typ": *
 
 #show: conf(doctitle: "TD1", subject: "ISI3", theme: luma(130))[
   #titlepage(

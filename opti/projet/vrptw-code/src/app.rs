@@ -1,14 +1,17 @@
+use crate::{
+    parser::InputData,
+    problem::{Problem, Solution},
+};
+use egui::{Color32, Widget};
 use std::path::PathBuf;
-
-use egui::Widget;
-
-use crate::parser::InputData;
 
 pub struct VrpApp {
     pub files: Vec<PathBuf>,
     pub selected_file_id: usize,
-    pub input_data: Option<InputData>,
     pub time_into_account: bool,
+    pub buffer: String,
+    pub problem: Option<Problem>,
+    pub solution: Option<Solution>,
 }
 
 impl Default for VrpApp {
@@ -30,16 +33,16 @@ impl VrpApp {
         Self {
             files,
             selected_file_id: 0,
-            input_data: None,
             time_into_account: false,
+            buffer: String::new(),
+            problem: None,
+            solution: None,
         }
     }
 
-    fn load_file(&mut self, selected_file: PathBuf) {
+    fn load_file(&mut self, selected_file: PathBuf) -> InputData {
         let file_contents = std::fs::read_to_string(selected_file);
-        if let Ok(contents) = file_contents {
-            self.input_data = Some(crate::parser::InputData::parse_input(&contents));
-        }
+        InputData::parse_input(file_contents.expect("IO error for file").as_str())
     }
 }
 
@@ -69,13 +72,47 @@ impl eframe::App for VrpApp {
                     });
                 if ui.button("Charger").clicked() {
                     let selected_file = self.files[self.selected_file_id].clone();
-                    self.load_file(selected_file);
+                    let input_data = self.load_file(selected_file);
+                    self.buffer = format!("{:#?}", input_data);
+                    let problem = Problem::new(input_data);
+                    self.problem = Some(problem.clone());
                 }
+                if ui.button("Effacer").clicked() {
+                    self.buffer.clear();
+                    self.problem = None;
+                    self.solution = None;
+                }
+                ui.add_enabled_ui(self.problem.is_some(), |ui| {
+                    if ui.button("Résoudre").clicked() {
+                        let solution = Solution::random(
+                            &self
+                                .problem
+                                .clone()
+                                .expect("No problem was submitted before solving"),
+                        );
+                        self.solution = Some(solution.clone());
+                        self.buffer = format!("{:#?}", solution);
+                    }
+                })
             });
 
         egui::CentralPanel::default().show(ctx, |ui| {
-            if let Some(input) = &self.input_data {
-                egui::ScrollArea::vertical().show(ui, |ui| ui.label(format!("{:#?}", input)));
+            let Some(_) = &self.problem else {
+                ui.centered_and_justified(|ui| {
+                    ui.label(
+                        egui::RichText::new("Chargez un fichier .vrp pour commencer")
+                            .size(18.0)
+                            .color(Color32::GRAY),
+                    );
+                });
+                return;
+            };
+            if !self.buffer.is_empty() {
+                egui::ScrollArea::vertical()
+                    .auto_shrink([false, false])
+                    .show(ui, |ui| {
+                        ui.label(self.buffer.clone());
+                    });
             }
         });
     }

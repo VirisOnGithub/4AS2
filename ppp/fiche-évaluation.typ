@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *
+#import "../template/src/polytech.typ": *
 
 #show: conf(doctitle: "Fiche d'approche par compétences", subject: "PPP", theme: blue)[
   #titlepage(authors: "Clément RENIERS")

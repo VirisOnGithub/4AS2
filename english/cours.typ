@@ -1,4 +1,4 @@
-#import "../template/polytech.typ": *
+#import "../template/src/polytech.typ": *
 
 #show: conf(doctitle: "English Course", subject: "English", theme: maroon)[
   #titlepage(
@@ -18,11 +18,12 @@
   - labour force (cheap people)
   - to raise to the occasion => to do something well in a difficult situation
   - cumbersome
-  - an incentive $!=$ a deterent
-  - head of departement (better than chief)
+  - an incentive $!=$ a deterrent
+  - head of department (better than chief)
   - to fire sb => to lay-off, to dismiss, to be made redundant
   - savvy => savoir-faire
   - from paycheck to paycheck => living with just enough money to cover basic expenses until the next payday()
+  - to wring => essorer
 
 
   = Regrets, Wishes, Resolutions
@@ -60,9 +61,9 @@
   - How did you get your internship?
   - What were the differences between you and the other applicants?
   - What was your relationship with other employees like?
-  - If you were abroad, did you noticce any significant cultural differences? 
+  - If you were abroad, did you noticce any significant cultural differences?
   - Would you recommand that experience to younger students?
-  - 
+  -
 
   #pagebreak()
   #rounded-image(image("WRITING.pdf"))
@@ -71,4 +72,8 @@
   = Banking and money
 
   #rounded-image(image("Banking  Money VOC WS.pdf"))
+
+  = Lipstick Index
+
+  
 ]

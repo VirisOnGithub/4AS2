@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Saisie d'une nouvelle rencontre</title>
 </head>
 <body>
-$END$
+    <h1>Saisie d'une nouvelle rencontre</h1>
+    <form action="listeRencontres" method="post">
+        <label for="equipe1">Equipe 1:</label>
+        <input type="number" id="equipe1" name="eq1" required><br><br>
+        <label for="equipe2">Equipe 2:</label>
+        <input type="number" id="equipe2" name="eq2" required><br><br>
+        <label for="score1">Score Equipe 1:</label>
+        <input type="number" id="score1" name="sc1" required><br><br>
+        <label for="score2">Score Equipe 2:</label>
+        <input type="number" id="score2" name="sc2" required><br><br>
+        <input type="submit" value="Enregistrer la rencontre">
+    </form>
 </body>
 </html>
