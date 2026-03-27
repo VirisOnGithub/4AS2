@@ -1,0 +1,188 @@
+---
+interface Props {
+	title: string;
+	subtitle: string;
+	buttonText: string;
+	imageSrc: string;
+	bgColor: string;
+	circleColor: string;
+	imgOffsetX?: string;
+	imgOffsetY?: string;
+	imgScale?: string;
+}
+
+const { title, subtitle, buttonText, imageSrc, bgColor, circleColor, imgOffsetX, imgOffsetY, imgScale } = Astro.props;
+
+const addPxIfUnitless = (value?: string) => {
+	if (!value || value.trim() === "") return "0px";
+	const v = value.trim();
+	return /^-?\d+(\.\d+)?$/.test(v) ? `${v}px` : v;
+};
+
+const offsetX = addPxIfUnitless(imgOffsetX);
+const offsetY = addPxIfUnitless(imgOffsetY);
+
+const scale = imgScale
+	? imgScale.trim().endsWith("%")
+		? String(Number.parseFloat(imgScale) / 100)
+		: imgScale.trim()
+	: "1";
+
+// Gestion de l'angle pour les bulles
+const angleToRadians = (angle: number) => (angle * Math.PI) / 180;
+const bigCircleSize = 300;
+const mediumCircleSize = 90;
+const smallCircleSize = 60;
+
+const smallBubblesAngle = angleToRadians(15);
+const mediumBubblesAngle = angleToRadians(38);
+
+const smallCircleOffsetY = Math.sin(smallBubblesAngle) * (bigCircleSize / 2 + smallCircleSize / 2);
+const smallCircleOffsetX = Math.cos(smallBubblesAngle) * (bigCircleSize / 2 + smallCircleSize / 2);
+const mediumCircleOffsetY = Math.sin(mediumBubblesAngle) * (bigCircleSize / 2 + mediumCircleSize / 2);
+const mediumCircleOffsetX = Math.cos(mediumBubblesAngle) * (bigCircleSize / 2 + mediumCircleSize / 2);
+
+---
+
+<div class="top-card" style={`background-color: ${bgColor};`}>
+	<div class="top-card-image-box">
+		<div class="top-card-circle circle-2 circle-top-right" style={`background-color: ${circleColor}; opacity: 0.8;`}></div>
+		<div class="top-card-circle circle-2 circle-bottom-left" style={`background-color: ${circleColor}; opacity: 0.8;`}></div>
+		<div class="top-card-circle-outline outline-1 outline-top-right" style={`border-color: ${circleColor};`}></div>
+		<div class="top-card-circle-outline outline-1 outline-bottom-left" style={`border-color: ${circleColor};`}></div>
+		
+		<!-- Partie basse de l'image (arrondie par le cercle) -->
+		<div class="top-card-circle circle-1" style={`background-color: ${circleColor}; overflow: hidden;`}>
+			<img src={imageSrc} alt={title} class="product-img" style={`transform: translate(calc(${offsetX} - 50%), ${offsetY}) scale(${scale});`} />
+		</div>
+		
+		<!-- Partie haute de l'image (qui sort du cercle) -->
+		<div class="top-card-circle circle-outer">
+			<img src={imageSrc} alt={title} class="product-img" style={`transform: translate(calc(${offsetX} - 50%), ${offsetY}) scale(${scale});`} />
+		</div>
+	</div>
+	<div class="top-card-content">
+		<h3 class="top-card-title"><slot name="title" /></h3>
+		<p class="top-card-subtitle">{subtitle}</p>
+		<button class="top-card-button">{buttonText}</button>
+	</div>
+</div>
+
+<style define:vars={{ bigCircleSize, mediumCircleSize, smallCircleSize, smallCircleOffsetX, smallCircleOffsetY, mediumCircleOffsetX, mediumCircleOffsetY }}>
+	.top-card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		padding: 2rem;
+		text-align: center;
+		color: white;
+		min-height: 600px;
+		font-family: system-ui, sans-serif;
+	}
+
+	.top-card-image-box {
+		position: relative;
+		width: 100%;
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 2rem;
+	}
+
+	.top-card-circle {
+		position: absolute;
+		border-radius: 50%;
+		z-index: 1;
+	}
+
+	.top-card-circle-outline {
+		position: absolute;
+		border-radius: 50%;
+		border: 3.5px solid;
+		z-index: 1;
+	}
+
+	.circle-1 {
+		width: calc(var(--bigCircleSize) * 1px);
+		height: calc(var(--bigCircleSize) * 1px);
+	}
+
+	.circle-2 {
+		width: calc(var(--smallCircleSize) * 1px);
+		height: calc(var(--smallCircleSize) * 1px);
+	}
+
+	.circle-top-right {
+		transform: translate(calc(var(--smallCircleOffsetX) * 1px), calc(-1 * var(--smallCircleOffsetY) * 1px));
+	}
+
+	.circle-bottom-left {
+		transform: translate(calc(-1 * var(--smallCircleOffsetX) * 1px), calc(var(--smallCircleOffsetY) * 1px));
+	}
+
+	.outline-1 {
+		width: calc(var(--mediumCircleSize) * 1px);
+		height: calc(var(--mediumCircleSize) * 1px);
+	}
+
+	.outline-top-right {
+		transform: translate(calc(var(--mediumCircleOffsetX) * 1px), calc(-1 * var(--mediumCircleOffsetY) * 1px));
+	}
+
+	.outline-bottom-left {
+		transform: translate(calc(-1 * var(--mediumCircleOffsetX) * 1px), calc(var(--mediumCircleOffsetY) * 1px));
+	}
+
+	.circle-outer {
+		width: calc(var(--bigCircleSize) * 1px);
+		height: calc(var(--bigCircleSize) * 1px);
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		clip-path: inset(-200px -100px 50% -100px);
+	}
+
+	.product-img {
+		height: 340px;
+		max-width: none;
+		position: absolute;
+		bottom: -15px; /* Décaler légèrement vers le bas pour couper dans l'arrondi */
+		left: 50%;
+	}
+
+	.top-card-content {
+		margin-top: auto;
+		z-index: 2;
+	}
+
+	.top-card-title {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.top-card-subtitle {
+		font-size: 2rem;
+		font-weight: 500;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.top-card-button {
+		background-color: #f1f5f9;
+		color: #0f172a;
+		font-weight: bold;
+		padding: 0.75rem 2rem;
+		border-radius: 9999px;
+		border: none;
+		cursor: pointer;
+		font-size: 1rem;
+		transition: background-color 0.2s;
+	}
+
+	.top-card-button:hover {
+		background-color: white;
+	}
+</style>

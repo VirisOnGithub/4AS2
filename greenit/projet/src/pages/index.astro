@@ -1,0 +1,437 @@
+---
+import Banner from "../components/Banner.astro";
+import HeaderBar from "../components/HeaderBar.astro";
+import Layout from "../layouts/Layout.astro";
+import BestSellersSwiper from "../components/BestSellersSwiper.astro";
+import TopCard from "../components/TopCard.astro";
+import BottomCard from "../components/BottomCard.astro";
+---
+
+<Layout>
+	<div class="page-shell">
+
+		<HeaderBar />
+		<main>
+			<!-- <Banner
+				title="Save 25% off our best-selling flavors and bottles"
+				description=""
+				eyebrow=""
+				buttonLabel="Shop now"
+				buttonHref="#machines"
+				imageSrc="/header.webp"
+				imageAlt="Visuel promotionnel SodaStream"
+				backgroundColor="#002349"
+				textColor="#0b2e5e"
+				buttonBg="#b77aa8"
+				buttonColor="#ffffff"
+				radius="0px"
+				minHeight="360px"
+				contentWidth="16ch"
+				imageFit="cover"
+				imagePosition="center right"
+			/> -->
+
+			<div style="height: 100px"></div>
+			
+			<section class="card-grid-section">
+				<div class="card-row">
+					<TopCard 
+						subtitle="fresh sparkling drinks at home" 
+						buttonText="shop now" 
+						imageSrc="/main_cards/sodastream_no_bg.png" 
+						bgColor="#002349" 
+						circleColor="#006ebe"
+						imgOffsetX="0"
+						imgOffsetY="5%"
+						imgScale="1.3"
+					><span slot="title">sparkling water makers</span></TopCard>
+					<TopCard 
+						title="CO2 cylinders" 
+						subtitle="fizz. swap. save" 
+						buttonText="shop now" 
+						imageSrc="/main_cards/refill_gas_no_bg.png" 
+						bgColor="#610037" 
+						circleColor="#b21a50"
+						imgOffsetX="0%"
+						imgOffsetY="25%"
+						imgScale="2"
+					>
+						<span slot="title">CO<sub style="vertical-align: -7%;">2</sub> cylinders</span>
+					</TopCard>
+				</div>
+				<div class="card-row">
+					<BottomCard 
+						title="flavors" 
+						subtitle="your favorite your way" 
+						buttonText="explore" 
+						imageSrc="/main_cards/orange_glass_no_bg.png" 
+						bgColor="linear-gradient(to bottom, #cf6e51, #b54a2c)" 
+						btnTextColor="#cf6e51"
+						imgOffsetX="-30%"
+						imgOffsetY="-15%"
+						imgScale="1.2"
+					/>
+					<BottomCard 
+						title="bottles" 
+						subtitle="drink better" 
+						buttonText="shop now" 
+						imageSrc="/main_cards/bottles_no_bg.png" 
+						bgColor="linear-gradient(to bottom, #1160af, #07478a)" 
+						btnTextColor="#1160af"
+						imgOffsetX="-5%"
+						imgOffsetY="10%"
+						imgScale="2"
+					/>
+				</div>
+			</section>
+			
+			<BestSellersSwiper />
+		</main>
+	</div>
+</Layout>
+
+<style>
+	:global(body) {
+		margin: 0;
+		background: #f5f9f3;
+		color: #0f2224;
+		font-family:
+			"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+	}
+
+	:global(h1, h2, h3) {
+		font-family: "Poppins", sans-serif;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		margin: 0;
+	}
+
+	.page-shell {
+		position: relative;
+		overflow-x: clip;
+		padding-bottom: 4rem;
+	}
+
+	.card-grid-section {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 1rem;
+		max-width: 1440px;
+		margin: 0 auto;
+	}
+
+	.card-row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.card-row {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	main {
+		padding: 0 clamp(1rem, 3vw, 3rem);
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: 1.2fr 1fr;
+		gap: 2rem;
+		align-items: center;
+		min-height: min(84vh, 760px);
+	}
+
+	.kicker {
+		margin: 0 0 0.65rem;
+		text-transform: uppercase;
+		font-size: 0.78rem;
+		letter-spacing: 0.18em;
+		font-weight: 700;
+		color: #145568;
+	}
+
+	.hero h1 {
+		font-size: clamp(2rem, 5vw, 4.8rem);
+		max-width: 18ch;
+	}
+
+	.hero-copy p {
+		font-size: clamp(1rem, 1.2vw, 1.15rem);
+		line-height: 1.6;
+		max-width: 54ch;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-top: 1.4rem;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.72rem 1.2rem;
+		border-radius: 999px;
+		font-weight: 700;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.solid {
+		background: #103a43;
+		color: #f6fffb;
+		box-shadow: 0 10px 20px rgba(16, 58, 67, 0.2);
+	}
+
+	.button.text {
+		color: #103a43;
+		padding-inline: 0;
+	}
+
+	.hero-visual {
+		position: relative;
+		display: grid;
+		place-items: center;
+		min-height: 430px;
+	}
+
+	.machine {
+		position: relative;
+		width: min(340px, 68vw);
+		height: min(430px, 78vw);
+	}
+
+	.machine-head {
+		position: absolute;
+		top: 0;
+		left: 18%;
+		width: 64%;
+		height: 14%;
+		border-radius: 30px;
+		background: linear-gradient(145deg, #1e4b53, #102e34);
+	}
+
+	.machine-body {
+		position: absolute;
+		top: 12%;
+		left: 26%;
+		width: 48%;
+		height: 82%;
+		border-radius: 50px;
+		background: linear-gradient(180deg, #f8fcff 0%, #daedf4 100%);
+		border: 1px solid rgba(16, 46, 52, 0.12);
+		box-shadow:
+			0 24px 30px rgba(16, 58, 67, 0.18),
+			inset 0 -18px 30px rgba(115, 165, 190, 0.24);
+	}
+
+	.machine-bottle {
+		position: absolute;
+		bottom: 2%;
+		left: 46%;
+		width: 24%;
+		height: 52%;
+		border-radius: 100px;
+		background: linear-gradient(
+			180deg,
+			rgba(216, 247, 255, 0.4),
+			rgba(24, 111, 136, 0.3)
+		);
+		border: 1px solid rgba(16, 58, 67, 0.22);
+	}
+
+	.bubble {
+		position: absolute;
+		border-radius: 100%;
+		background: rgba(255, 255, 255, 0.8);
+		border: 1px solid rgba(16, 58, 67, 0.15);
+		animation: float 3.8s ease-in-out infinite;
+	}
+
+	.bubble-1 {
+		width: 44px;
+		height: 44px;
+		top: 20%;
+		left: 17%;
+	}
+
+	.bubble-2 {
+		width: 24px;
+		height: 24px;
+		top: 34%;
+		right: 24%;
+		animation-delay: 0.8s;
+	}
+
+	.bubble-3 {
+		width: 16px;
+		height: 16px;
+		top: 16%;
+		right: 16%;
+		animation-delay: 1.5s;
+	}
+
+	.stat-strip {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.stat-strip article {
+		padding: 1.2rem;
+		border-radius: 20px;
+		background: rgba(255, 255, 255, 0.7);
+		border: 1px solid rgba(16, 58, 67, 0.12);
+		backdrop-filter: blur(8px);
+	}
+
+	.stat-strip h2 {
+		font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+	}
+
+	.stat-strip p {
+		margin: 0.35rem 0 0;
+	}
+
+	.flavors {
+		padding-top: clamp(2.5rem, 6vw, 5rem);
+	}
+
+	.section-title h2 {
+		font-size: clamp(1.8rem, 4vw, 3rem);
+	}
+
+	.flavor-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.2rem;
+	}
+
+	.flavor-card {
+		padding: 1.3rem;
+		border-radius: 24px;
+		background: linear-gradient(
+			150deg,
+			rgba(255, 255, 255, 0.95),
+			rgba(222, 243, 255, 0.68)
+		);
+		border: 1px solid rgba(16, 58, 67, 0.14);
+	}
+
+	.flavor-card h3 {
+		font-size: 1.5rem;
+		margin-bottom: 0.35rem;
+	}
+
+	.impact {
+		margin-top: clamp(2rem, 5vw, 4.5rem);
+		padding: clamp(1.2rem, 3vw, 2.2rem);
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+		gap: 1.2rem;
+		border-radius: 28px;
+		background: linear-gradient(130deg, #e8ffd9, #dff5ff 50%, #f8ffea);
+		border: 1px solid rgba(16, 58, 67, 0.18);
+	}
+
+	.impact h2 {
+		font-size: clamp(1.75rem, 3.8vw, 2.8rem);
+	}
+
+	.impact p {
+		max-width: 58ch;
+		line-height: 1.6;
+	}
+
+	.reveal,
+	.reveal-delay,
+	.reveal-delay-2 {
+		opacity: 0;
+		animation: rise 680ms ease forwards;
+	}
+
+	.reveal-delay {
+		animation-delay: 160ms;
+	}
+
+	.reveal-delay-2 {
+		animation-delay: 320ms;
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(24px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	@media (max-width: 980px) {
+		.hero {
+			grid-template-columns: 1fr;
+			padding-top: 1rem;
+		}
+
+		.hero-visual {
+			order: -1;
+			min-height: 300px;
+		}
+
+		.stat-strip,
+		.flavor-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.impact {
+			flex-direction: column;
+			align-items: start;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.stat-strip,
+		.flavor-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal,
+		.reveal-delay,
+		.reveal-delay-2,
+		.bubble {
+			animation: none;
+			opacity: 1;
+		}
+	}
+</style>

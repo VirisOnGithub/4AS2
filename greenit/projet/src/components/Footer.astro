@@ -1,0 +1,467 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+        <div class="country-section" aria-label="Country selector">
+          <span class="country-dot" aria-hidden="true"></span>
+          <span>USA</span>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+        <h3>Register to hear about our latest offers and promotions and get a 10% discount on your next purchase!</h3>
+        <form class="newsletter-form">
+            <input 
+            type="email" 
+            placeholder="Enter email address" 
+            required
+            aria-label="Email address"
+            />
+            <button type="submit">sign me up!</button>
+        </form>
+        <p class="disclaimer">
+            You can withdraw your consent and unsubscribe at any time. <a href="#">View terms and privacy.</a> *Gas cylinder and cylinder exchange not eligible for discount Financial Incentive notice
+        </p>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="footer-bottom">
+            <div class="footer-content">
+                <div class="logo-section">
+                    <h2 class="logo">sodastream</h2>
+                </div>
+
+                <div class="info-section">
+                    <p>© 2026 Sodastream Inc.</p>
+                    <p>All rights reserved. Distributed by: Sodastream USA, Inc. Purchase, NY 10577</p>
+                    <p>1.800.763.2258</p>
+                </div>
+
+                <div class="social-section">
+                    <a href="#" aria-label="Facebook"><img src="/icons/facebook.svg"></a>
+                    <a href="#" aria-label="Instagram"><img src="/icons/instagram.svg"></a>
+                    <a href="#" aria-label="YouTube"><img src="/icons/youtube.svg"></a>
+                    <a href="#" aria-label="TikTok"><img src="/icons/tiktok.svg"></a>
+                    <a href="#" aria-label="Threads"><img src="/icons/threads.svg"></a>
+                    <a href="#" aria-label="Pinterest"><img src="/icons/pinterest.svg"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Links Section -->
+    <div class="links-section">
+      <div class="column">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Sparkling Water Makers</a></li>
+          <li><a href="#">Carbonating Cylinder</a></li>
+          <li><a href="#">Flavors</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Gifts</a></li>
+          <li><a href="#">Get a Refill</a></li>
+          <li><a href="#">Bulk Order Request</a></li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="#">Refer a friend</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Product Registration</a></li>
+          <li><a href="#">Reprint Return Label</a></li>
+          <li><a href="#">Machine Recycling</a></li>
+          <li><a href="#">Accessibility statement</a></li>
+          <li><a href="#">Legal Terms</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Cookies Policy</a></li>
+          <li><a href="#">Do not sell my information</a></li>
+          <li><a href="#">Sodastream CO2 Support</a></li>
+          <li><a href="#">Resellers</a></li>
+          <li><a href="#">SodaStream Recipes</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Financial Incentive</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>More</h4>
+        <ul>
+          <li><a href="#">Account & Track Orders</a></li>
+          <li><a href="#">Find a store near you 🗺</a></li>
+          <li><a href="#">USA</a></li>
+          <li><a href="#">Sodastream Recipes</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Financial Incentive</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: #002349;
+    color: #ffffff;
+    padding: 28px 20px 32px;
+  }
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 0;
+  }
+
+  .country-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(14px, 3.6vw, 16px);
+    font-weight: 600;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .country-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, #ffffff 0 35%, transparent 38%),
+      repeating-linear-gradient(
+        to bottom,
+        #d13f4b 0 2px,
+        #ffffff 2px 4px
+      ),
+      #2c4fa4;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  /* Newsletter Section */
+  .newsletter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 18px;
+  }
+
+  .newsletter-section h3 {
+    font-size: clamp(24px, 5.4vw, 34px)&;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .newsletter-form input {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .newsletter-form input::placeholder {
+    color: #999;
+  }
+
+  .newsletter-form button {
+    padding: 14px 20px;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: background-color 0.3s;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #0052a3;
+  }
+
+  .disclaimer {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .disclaimer a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  /* Links Section */
+  .links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .column h4 {
+    font-size: clamp(28px, 6vw, 38px);
+    font-weight: 700;
+    margin: 0;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  .column h4::after {
+    content: "\2304";
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+
+  .column ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .column a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: clamp(21px, 4.2vw, 28px);
+    transition: opacity 0.3s;
+  }
+
+  .column a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  /* Bottom Section */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 28px;
+    margin-top: 34px;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .logo-section {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .logo {
+    font-size: clamp(42px, 8.2vw, 56px);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .info-section {
+    text-align: start;
+  }
+
+  .info-section p {
+    margin: 0 0 8px 0;
+    font-size: clamp(16px, 3.6vw, 24px);
+    line-height: 1.6;
+  }
+
+  .social-section {
+    display: flex;
+    gap: 14px;
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+
+  .social-section a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+  }
+
+  .social-section img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .social-section a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  @media (min-width: 641px) {
+    .footer {
+      padding: 44px 32px 34px;
+    }
+
+    .country-section {
+      font-size: 16px;
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+    }
+
+    .newsletter-section {
+      padding: 24px;
+    }
+
+    .newsletter-section h3 {
+      font-size: 20px;
+      line-height: 1.28;
+    }
+
+    .logo {
+      font-size: 42px;
+    }
+
+    .info-section p {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .column h4 {
+      font-size: 28px;
+    }
+
+    .column a {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .footer {
+      padding: 60px 40px 40px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      margin-bottom: 60px;
+    }
+
+    .links-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .country-section {
+      font-size: 18px;
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+
+    .newsletter-section {
+      gap: 20px;
+      border: 1px solid white;
+      padding: 30px;
+    }
+
+    .newsletter-section h3 {
+      font-size: 34px;
+      line-height: 1.3;
+    }
+
+    .newsletter-form input {
+      padding: 15px 20px;
+    }
+
+    .newsletter-form button {
+      padding: 15px 20px;
+      font-size: 16px;
+    }
+
+    .column h4 {
+      font-size: 16px;
+      margin: 0 0 20px 0;
+      display: block;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .column h4::after {
+      content: none;
+    }
+
+    .column ul {
+      margin: 0;
+      gap: 12px;
+    }
+
+    .column a {
+      font-size: 14px;
+    }
+
+    .footer-bottom {
+      padding-top: 40px;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      gap: 0;
+    }
+
+    .logo {
+      font-size: 28px;
+    }
+
+    .info-section p {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+    }
+
+    .social-section {
+      gap: 15px;
+      margin-top: 0;
+    }
+
+    .social-section a {
+      width: 40px;
+      height: 40px;
+    }
+
+    .social-section img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .newsletter-section h3 {
+      font-size: 20px;
+    }
+  }
+</style>

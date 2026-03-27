@@ -1,0 +1,53 @@
+---
+import Footer from "../components/Footer.astro";
+---
+
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta
+			name="description"
+			content="Machine a eau petillante et concentres maison: une experience boisson premium et durable."
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="icon" href="/favicon.webp" />
+		<meta name="generator" content={Astro.generator} />
+		<title>SodaStream Official: Sparkling Water Makers, Carbonating Gas Cylinders</title>
+	</head>
+	<body>
+		<slot />
+		<Footer />
+	</body>
+	<style>
+		body,
+		html {
+			font-family: "Poppins", Arial, sans-serif;
+		}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: "Poppins", Arial, sans-serif;
+			font-weight: 700;
+		}
+	</style>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

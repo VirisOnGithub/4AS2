@@ -1,0 +1,128 @@
+---
+interface Props {
+	title: string;
+	subtitle: string;
+	buttonText: string;
+	imageSrc: string;
+	bgColor: string;
+	btnTextColor?: string;
+	imgOffsetX?: string;
+	imgOffsetY?: string;
+	imgScale?: string;
+}
+
+const { title, subtitle, buttonText, imageSrc, bgColor, btnTextColor, imgOffsetX, imgOffsetY, imgScale } = Astro.props;
+
+const addPxIfUnitless = (value?: string) => {
+	if (!value || value.trim() === "") return "0px";
+	const v = value.trim();
+	return /^-?\d+(\.\d+)?$/.test(v) ? `${v}px` : v;
+};
+
+const offsetX = addPxIfUnitless(imgOffsetX);
+const offsetY = addPxIfUnitless(imgOffsetY);
+
+const scale = imgScale
+	? imgScale.trim().endsWith("%")
+		? String(Number.parseFloat(imgScale) / 100)
+		: imgScale.trim()
+	: "1";
+---
+
+<div class="bottom-card" style={`background: ${bgColor};`}>
+	<div class="bottom-card-content">
+		<h3 class="bottom-card-title">{title}</h3>
+		<p class="bottom-card-subtitle">{subtitle}</p>
+		<button class="bottom-card-button" style={`color: ${btnTextColor || '#fff'};`}>{buttonText}</button>
+	</div>
+	<div class="bottom-card-image-box">
+		<img src={imageSrc} alt={title} class="bottom-card-img" style={`transform: translate(${offsetX}, ${offsetY}) scale(${scale});`} />
+	</div>
+</div>
+
+<style>
+	.bottom-card {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 2rem;
+		color: white;
+		min-height: 250px;
+		font-family: system-ui, sans-serif;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.bottom-card-content {
+		flex: 1;
+		z-index: 10;
+		padding-left: 1rem;
+	}
+
+	.bottom-card-title {
+		font-size: 3.5rem;
+		font-weight: 800;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.bottom-card-subtitle {
+		font-size: 2rem;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.bottom-card-button {
+		background-color: #f1f5f9;
+		font-weight: bolder;
+		padding: 0.75rem 2rem;
+		border-radius: 9999px;
+		border: none;
+		cursor: pointer;
+		font-size: 1.5rem;
+		transition: background-color 0.2s;
+	}
+
+	.bottom-card-button:hover {
+		background-color: white;
+	}
+
+	.bottom-card-image-box {
+		flex: 1;
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+		height: 100%;
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+	}
+
+	.bottom-card-img {
+		max-height: 230px;
+		object-fit: contain;
+		margin-right: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		.bottom-card {
+			flex-direction: column;
+			text-align: center;
+			padding-bottom: 0;
+		}
+		
+		.bottom-card-content {
+			padding: 0;
+			margin-bottom: 1rem;
+		}
+
+		.bottom-card-image-box {
+			position: static;
+			justify-content: center;
+			margin-top: 1rem;
+		}
+		
+		.bottom-card-img {
+			margin-right: 0;
+		}
+	}
+</style>

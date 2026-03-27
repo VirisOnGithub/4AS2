@@ -1,0 +1,246 @@
+---
+const navItems = [
+    { label: "Shop", href: "#", hasArrow: true },
+    { label: "CO2", href: "#", hasArrow: true },
+    { label: "Impact", href: "#", hasArrow: true },
+    { label: "co2 refill", href: "#" },
+    { label: "Sale", href: "#" },
+];
+---
+
+<header class="header-wrap" aria-label="Barre de navigation principale">
+    <div class="header-bar">
+        <button class="hamburger-btn" aria-label="Menu" aria-expanded="false">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="15" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <a class="logo" href="#" aria-label="SodaStream accueil">sodastream</a>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <nav class="main-nav" aria-label="Navigation principale">
+            {
+                navItems.map((item) => (
+                    <a href={item.href} class="nav-item">
+                        {item.label}
+                        {item.hasArrow && (
+                            <span class="arrow" aria-hidden="true" />
+                        )}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <div class="right-actions">
+            <a href="#" class="quick-link">
+                Quick Links
+                <span class="arrow" aria-hidden="true"></span>
+            </a>
+            <a href="#" class="icon-btn" aria-label="Compte">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <circle cx="12" cy="8" r="4"></circle>
+                    <path d="M4 21c1.8-3.8 5-5.5 8-5.5s6.2 1.7 8 5.5"></path>
+                </svg>
+            </a>
+            <a href="#" class="icon-btn" aria-label="Panier">
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M4 6h3l1.5 9.5h9.5l2-7H8.2"></path>
+                    <circle cx="10" cy="20" r="1.5"></circle>
+                    <circle cx="18" cy="20" r="1.5"></circle>
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>
+
+<style>
+    .header-wrap {
+        padding: 0.95rem clamp(0.8rem, 2.2vw, 1.8rem);
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 100;
+    }
+
+    .header-bar {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        width: 100%;
+        max-width: 1450px;
+        min-height: 82px;
+        padding: 0 1.25rem;
+        border-radius: 999px;
+        background: #f7f7f8;
+        border: 1px solid #cdd2dd;
+        box-shadow: 0 10px 24px rgba(8, 24, 58, 0.22);
+        box-sizing: border-box;
+    }
+
+    .hamburger-btn {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: #08264a;
+    }
+
+    .hamburger-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .logo {
+        font-family:
+            "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+        font-size: clamp(1.65rem, 2.2vw, 2rem);
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        text-decoration: none;
+        color: #08264a;
+        padding: 0.5rem 0.9rem;
+        text-transform: lowercase;
+    }
+
+    .divider {
+        width: 1px;
+        height: 58px;
+        background: #d8dce4;
+    }
+
+    .main-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(0.9rem, 1.7vw, 1.8rem);
+    }
+
+    .nav-item,
+    .quick-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        text-decoration: none;
+        color: #08264a;
+        font-weight: 700;
+        font-size: clamp(0.92rem, 1.2vw, 1.06rem);
+        letter-spacing: 0.01em;
+        text-transform: none;
+    }
+
+    .nav-item:hover,
+    .quick-link:hover {
+        color: #14457e;
+    }
+
+    .arrow {
+        font-size: 0.92rem;
+        line-height: 1;
+    }
+
+    .right-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+    }
+
+    .quick-link {
+        font-weight: 500;
+        margin-right: 0.4rem;
+    }
+
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 999px;
+        color: #08264a;
+        text-decoration: none;
+    }
+
+    .icon-btn:hover {
+        background: #e8edf4;
+    }
+
+    .icon-btn svg {
+        width: 21px;
+        height: 21px;
+    }
+
+    @media (max-width: 1200px) {
+        .header-bar {
+            max-width: 1000px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .header-bar {
+            border-radius: 0;
+            border: none;
+            background: #f7f7f8;
+            box-shadow: none;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            padding: 0 1rem;
+            min-height: 60px;
+            gap: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .header-wrap {
+            padding: 0;
+        }
+
+        .hamburger-btn {
+            display: inline-flex;
+            justify-self: start;
+        }
+
+        .logo {
+            justify-self: center;
+            padding: 0;
+            font-size: 1.8rem;
+        }
+
+        .right-actions {
+            margin-left: 0;
+            justify-self: end;
+        }
+
+        .main-nav,
+        .divider,
+        .quick-link {
+            display: none;
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+</style>

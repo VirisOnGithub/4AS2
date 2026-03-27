@@ -1,0 +1,178 @@
+---
+interface Props {
+    title?: string;
+    description?: string;
+    eyebrow?: string;
+    buttonLabel?: string;
+    buttonHref?: string;
+    imageSrc?: string;
+    imageAlt?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    buttonBg?: string;
+    buttonColor?: string;
+    radius?: string;
+    minHeight?: string;
+    contentWidth?: string;
+    imageFit?: "cover" | "contain";
+    imagePosition?: string;
+}
+
+const {
+    title = "Save 25% on our best-selling flavors and bottles",
+    description = "Build your favorite sparkling drinks at home in seconds.",
+    eyebrow = "Limited time offer",
+    buttonLabel = "Shop now",
+    buttonHref = "#",
+    imageSrc = "/header.webp",
+    imageAlt = "Boissons petillantes maison",
+    backgroundColor = "#f0edf1",
+    textColor = "#072d5b",
+    buttonBg = "#b978a7",
+    buttonColor = "#ffffff",
+    radius = "24px",
+    minHeight = "320px",
+    contentWidth = "22ch",
+    imageFit = "cover",
+    imagePosition = "center right",
+} = Astro.props;
+---
+
+<section
+    class="banner"
+    aria-label="Banniere promotionnelle"
+    style={`--banner-bg:${backgroundColor}; --banner-text:${textColor}; --banner-btn-bg:${buttonBg}; --banner-btn-text:${buttonColor}; --banner-radius:${radius}; --banner-min-height:${minHeight}; --banner-content-width:${contentWidth}; --banner-image-position:${imagePosition};`}
+>
+    <div class="content">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h2>{title}</h2>
+        {description && <p>{description}</p>}
+        {
+            buttonLabel && (
+                <a class="cta" href={buttonHref}>
+                    {buttonLabel}
+                </a>
+            )
+        }
+    </div>
+
+    <div class="media">
+        <img
+            src={imageSrc}
+            alt={imageAlt}
+            loading="eager"
+            decoding="async"
+            style={`object-fit:${imageFit}; object-position:${imagePosition};`}
+        />
+    </div>
+</section>
+
+<style>
+    .banner {
+        display: grid;
+        grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+        align-items: stretch;
+        margin: 0.4rem 0 1.8rem;
+        border-radius: var(--banner-radius);
+        overflow: hidden;
+        background: var(--banner-bg);
+        min-height: var(--banner-min-height);
+        box-shadow: 0 10px 24px rgba(12, 32, 58, 0.18);
+    }
+
+    .content {
+        padding: clamp(1.4rem, 3vw, 3rem);
+        color: var(--banner-text);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.7rem;
+    }
+
+    .eyebrow {
+        margin: 0;
+        font-size: 0.76rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: color-mix(in srgb, var(--banner-text) 65%, #ffffff 35%);
+    }
+
+    h2 {
+        margin: 0;
+        max-width: var(--banner-content-width);
+        font-size: clamp(2rem, 4vw, 4rem);
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+    }
+
+    .content p {
+        margin: 0;
+        max-width: 42ch;
+        font-size: clamp(0.96rem, 1.2vw, 1.08rem);
+        line-height: 1.55;
+        color: color-mix(in srgb, var(--banner-text) 82%, #ffffff 18%);
+    }
+
+    .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.7rem;
+        width: fit-content;
+        padding: 0.8rem 1.6rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: clamp(1rem, 1.2vw, 1.15rem);
+        background: var(--banner-btn-bg);
+        color: var(--banner-btn-text);
+        transition:
+            transform 180ms ease,
+            filter 180ms ease;
+    }
+
+    .cta:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.05);
+    }
+
+    .media {
+        height: 100%;
+    }
+
+    .media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: var(--banner-min-height);
+    }
+
+    @media (max-width: 900px) {
+        .banner {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
+
+        .media {
+            min-height: 220px;
+        }
+
+        .media img {
+            min-height: 220px;
+            max-height: 320px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        h2 {
+            max-width: 14ch;
+            font-size: clamp(1.8rem, 9vw, 2.8rem);
+        }
+
+        .cta {
+            width: 100%;
+        }
+    }
+</style>
