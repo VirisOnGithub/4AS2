@@ -1,4 +1,4 @@
-#import "../template/src/polytech.typ": *
+#import "@local/polytech:1.0.0": *
 
 #show: conf(doctitle: "Fiche d'approche par compétences", subject: "PPP", theme: blue)[
   #titlepage(authors: "Clément RENIERS")
@@ -40,15 +40,42 @@
 
   - Concevoir l’architecture d’une application
 
-  
+  J'ai designé l'architecture d'une application de A à Z, en choisissant les technologies utilisées, et en organisant le code de manière à ce qu'il soit facilement maintenable et évolutif.
+  J'ai aussi fait attention à respecter les formalismes de l'entreprise, comme le respect des normes de code, ou l'utilisation de certains outils de développement.
 
   - Identifier les couches et développer des composants modulaires
+
+  Dans des projets de l'envergure de ceux sur lesquels j'ai travaillé, il est quasiment impossible de ne pas créer des modules de code, au risque d'avoir un code difficile à maintenir et à faire évoluer. J'ai donc veillé à créer différents modules de code.
+
   - Concevoir et gérer une base de données
+
+  Sans devoir la concevoir entièrement, j'ai dû créer/modifier plusieurs bases de données et les remplir, à la main ou à l'aide de scripts, pour les besoins de l'application.
+
   - Mettre en œuvre les bases du développement Front-end et Back-end
+
+  Mon stage étant principalement orienté scripting / backend, j'ai peu travaillé sur le développement front-end, mais j'ai eu l'occasion de travailler sur des parties graphiques des outils internes de l'entreprise.
+
   - Gérer une authentification basique
+
+  L'authentification est un aspect obligatoire de tout projet informatique, j'ai dû gérer une authentification très simple mais efficace pour les applications internes.
+
   - Utiliser une forge logicielle
+
+  Comme dans la plupart des entreprises, nous avons utilisé Git pour versionner les fichiers et collaborer sur le code.
+
   - Organiser la communication entre les processus / composants
+
+  Ma principale tâche a été de créer des API, afin de communiquer avec les différents services de l'entreprise déjà existants.
+
   - Concevoir et gérer une base de données répartie
+
+  J'ai travaillé sur différentes bases de données, relationnelles ou non, et j'ai dû gérer la synchronisation entre les différentes bases de données utilisées par l'application.
+
   - Tester et valider les composants et leur intégration
+
+  Les tests au sein de l'entreprise étaient plutôt des tests de l'outil en pré-production pour valider les fonctionnalités, mais j'ai aussi eu l'occasion de faire des tests unitaires sur certaines parties du code.
+
   - Rédiger une spécification fonctionnelle
+
+  Les spécifications fonctionnelles étaient déjà rédigées pour mes projets, mais j'ai eu l'occasion de les lire et de les utiliser pour guider mon développement.
 ]

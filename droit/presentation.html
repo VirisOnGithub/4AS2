@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subsonic : Étude de cas - Droit PI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --r-main-font-size: 2rem;
+            --r-heading-font-size: 2.8rem;
+            --r-heading1-size: 3.2rem;
+            --r-background-color: #ffffff;
+            --r-main-color: #1a1a1a;
+            --r-link-color: #186db4;
+            --r-link-color-hover: #3ba7d8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .reveal {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            text-transform: none;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .reveal section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+            box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.03);
+            padding: 1.5rem !important;
+        }
+
+        .image-wrapper {
+            background: #ffffff;
+            padding: 2.5%;
+            border-radius: 14px;
+            box-shadow: 0 8px 35px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .image-wrapper:hover {
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6%;
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        .image-col {
+            flex: 1;
+            text-align: center;
+        }
+
+        .image-col .image-wrapper {
+            width: 100%;
+        }
+
+        .image-col img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .content-box {
+            width: 85%;
+            background: linear-gradient(135deg, rgba(24, 109, 180, 0.1) 0%, rgba(24, 109, 180, 0.05) 100%);
+            padding: 3%;
+            border-radius: 14px;
+            border-left: 5px solid #186db4;
+            box-shadow: 0 4px 16px rgba(24, 109, 180, 0.08);
+            margin: 2rem auto;
+        }
+
+        .content-box p {
+            margin: 0.8rem 0;
+            line-height: 1.7;
+            color: #2a2a2a;
+        }
+
+        .list-inline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-inline li {
+            font-size: 1.7rem;
+            text-align: left;
+            list-style: none;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+            color: #2a2a2a;
+        }
+
+        .list-inline li:before {
+            content: "●";
+            position: absolute;
+            left: 0.3rem;
+            color: #186db4;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        .logo-title {
+            max-width: 22%;
+            height: auto;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .two-col-layout {
+            display: flex;
+            width: 90%;
+            gap: 5%;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+        }
+
+        .two-col-layout>div {
+            flex: 1;
+        }
+
+        .figure-caption {
+            font-size: 1.3rem;
+            color: #666;
+            margin-top: 1.2rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .highlight-number {
+            color: #186db4;
+            font-weight: 800;
+            font-size: 1.25em;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section-number {
+            font-size: 5.5rem;
+            color: #186db4;
+            margin-bottom: 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .reveal h2 {
+            color: #186db4;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            font-size: 2.8rem;
+        }
+
+        .reveal h3 {
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .cost-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5%;
+            border-radius: 12px;
+            border-left: 5px solid #186db4;
+            text-align: left;
+            margin-bottom: 1.4rem;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .cost-box h4 {
+            color: #186db4;
+            margin: 0 0 0.9rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cost-box p {
+            margin: 0.5rem 0;
+            font-size: 1.6rem;
+            color: #2a2a2a;
+            line-height: 1.6;
+        }
+
+        .victory-box {
+            background: linear-gradient(135deg, rgba(104, 255, 107, 0.15) 0%, rgba(104, 255, 107, 0.08) 100%) !important;
+            border-left-color: #68ff6b !important;
+        }
+
+        .victory-box p {
+            color: #2a2a2a;
+        }
+
+        .reveal .slide-number {
+            color: #186db4;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .reveal a {
+            color: #186db4;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .reveal a:hover {
+            color: #3ba7d8;
+        }
+
+        .reveal p {
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- TITRE -->
+            <section>
+                <div style="width: 90%; margin: 0 auto; padding: 2% 0;">
+                    <img src="logo_subsonic.webp" class="logo-title" alt="Logo Subsonic" style="margin-bottom: 2rem;">
+                    <h1 style="margin-top: 1.5rem; color: #186db4; font-size: 3.8rem; line-height: 1.2;">Subsonic</h1>
+                    <h3 style="color: #666; font-size: 1.9rem; font-weight: 500;">Étude de cas</h3>
+                    <p style="color: #888; font-size: 1.6rem; margin-top: 2rem;">Droit de la Propriété Intellectuelle
+                    </p>
+                    <div style="margin-top: 3rem; font-size: 1.4rem; color: #2a2a2a; line-height: 1.8;">
+                        <p><strong>Louison Parant</strong> • <strong>Clément Reniers</strong></p>
+                        <p style="margin-top: 0.5rem;"><strong>Luka Coutant</strong> • <strong>Alin Bonciu</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTRO -->
+            <section>
+                <h2>Le contexte</h2>
+                <div class="content-box" style="font-size: 1.8rem; text-align: center;">
+                    <p style="font-weight: 600; color: #1a1a1a; margin: 0;"><strong>Subsonic</strong> fabrique des
+                        manettes de jeu</p>
+                    <p style="color: #666; margin-top: 1.3rem; font-size: 1.6rem; margin-bottom: 0;">Compatibles avec
+                        PlayStation, Xbox, Nintendo Switch</p>
+                </div>
+            </section>
+
+            <!-- ===== QUESTION 1 ===== -->
+            <section>
+                <div class="section-number">1</div>
+                <h2>Protections industrielles</h2>
+                <p style="color: #666; font-size: 1.5rem; margin: 1rem 0 0 0;">Quelles protections pour les manettes PS
+                    ?</p>
+            </section>
+
+            <section>
+                <h3>Protection de la marque</h3>
+                <div class="two-col-layout">
+                    <div style="text-align: center;">
+                        <div class="image-wrapper">
+                            <img src="Sony_logo.svg" style="width: 85%; height: auto;" alt="Logo Sony">
+                        </div>
+                        <div class="image-wrapper" style="margin-top: 2.5rem;">
+                            <img src="ps.png" style="width: 85%; height: auto;" alt="Logo PlayStation">
+                        </div>
+                    </div>
+                    <div style="text-align: left; padding-left: 2%;">
+                        <ul class="list-inline" style="margin: 0;">
+                            <li>Marques déposées par Sony</li>
+                            <li>Protection exclusive</li>
+                            <li>Subsonic ne peut pas les utiliser</li>
+                            <li>Risque de contrefaçon</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Protection du design</h3>
+                <div class="image-row">
+                    <div class="image-col">
+                        <div class="image-wrapper">
+                            <img src="xbox.png" style="width: 100%; height: auto; padding: 1%;" alt="Manette Xbox">
+                        </div>
+                        <p class="figure-caption">Xbox Elite Series Core 2</p>
+                    </div>
+                    <div class="image-col">
+                        <div class="image-wrapper">
+                            <img src="manette2-removebg-preview.png" style="width: 100%; height: auto; padding: 1%;"
+                                alt="Manette Sony">
+                        </div>
+                        <p class="figure-caption">Sony DualShock PS4</p>
+                    </div>
+                </div>
+                <p style="font-size: 1.5rem; color: #666; margin-top: 1.8rem; line-height: 1.6;">Chaque fabricant :
+                    design unique • joysticks placés différemment</p>
+            </section>
+
+            <section>
+                <h3>Protection par brevet</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.3rem 0; color: #1a1a1a;">
+                        <strong>Brevet d'invention</strong>: protection de la technologie interne
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li>Durée : 20 ans</li>
+                        <li>Solution révélée au public</li>
+                        <li>Demande auprès : INPI (France) ou OEB (Europe)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Coûts d'un brevet</h3>
+                <div style="width: 88%; margin: 0 auto;">
+                    <div class="cost-box">
+                        <h4>En France (INPI)</h4>
+                        <p>🔹 Dépôt : <span class="highlight-number">26€</span></p>
+                        <p>🔹 Recherche : <span class="highlight-number">520€</span></p>
+                        <p>🔹 Délivrance : <span class="highlight-number">90€</span></p>
+                        <p>🔹 Annuités : <span class="highlight-number">38€ → 800€</span> (20 ans)</p>
+                    </div>
+                    <div class="cost-box">
+                        <h4>En Europe (OEB)</h4>
+                        <p>≈ <span class="highlight-number">6 800€</span> + annuités par pays</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== QUESTION 2 ===== -->
+            <section>
+                <div class="section-number">2</div>
+                <h2>Type de contrat</h2>
+                <p style="color: #666; font-size: 1.5rem; margin: 1rem 0 0 0;">Subsonic ↔ Sony : un partenariat légal
+                    possible ?
+                </p>
+            </section>
+
+            <section>
+                <h3>Licence officielle</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.3rem 0; color: #1a1a1a;">
+                        <strong>✓ Seule solution légale</strong> pour fabriquer et vendre des manettes compatibles
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li>Respect des droits PI de Sony</li>
+                        <li>Paiement de redevances</li>
+                        <li>Respect de normes qualité</li>
+                        <li>Design conforme</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Un partenariat strict</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.3rem 0; color: #1a1a1a;">
+                        <strong>Exigences de Sony</strong>
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li>Compatibilité avec consoles PS</li>
+                        <li>Tests de fiabilité</li>
+                        <li>Rapports d'essais supplémentaires</li>
+                        <li>Processus long et coûteux</li>
+                    </ul>
+                </div>
+                <p style="color: #666; font-size: 1.5rem; margin-top: 2rem; line-height: 1.6;">
+                    Résultat : <span class="highlight-number">seulement 20 partenaires</span> officiels
+                </p>
+            </section>
+
+            <section>
+                <h3>Les 20 partenaires officiels de Sony</h3>
+                <div style="display: flex; justify-content: center; margin: 2rem auto; width: 90%;">
+                    <div class="image-wrapper" style="max-width: 90%;">
+                        <img src="partners.png" style="width: 100%; height: auto;" alt="Partenaires Sony">
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== QUESTION 3 ===== -->
+            <section>
+                <div class="section-number">3</div>
+                <h2>Contrefaçon & <br>concurrence</h2>
+                <p style="color: #666; font-size: 1.5rem; margin: 1rem 0 0 0;">Quand c'est illégal ?</p>
+            </section>
+
+            <section>
+                <h3>Contrefaçon de brevet</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.3rem 0; font-size: 1.6rem; color: #1a1a1a;">
+                        <strong>C'est une contrefaçon si on :</strong>
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li style="font-size: 1.6rem;">Fabrique le produit breveté</li>
+                        <li style="font-size: 1.6rem;">L'utilise</li>
+                        <li style="font-size: 1.6rem;">Le vend</li>
+                        <li style="font-size: 1.6rem;">L'importe/exporte</li>
+                        <li style="font-size: 1.6rem;">Utilise un procédé breveté</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Pour poursuivre en justice</h3>
+                <div class="content-box">
+                    <ul class="list-inline">
+                        <li>Être titulaire du brevet ou licencié exclusif</li>
+                        <li>Apporter des preuves concrètes</li>
+                        <li>Démontrer l'exploitation réelle</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Concurrence déloyale</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.3rem 0; color: #1a1a1a;">
+                        <strong>Pratiques commerciales trompeuses :</strong>
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li><strong>Désorganisation</strong> : débaucher massivement les employés</li>
+                        <li><strong>Confusion</strong> : créer une ressemblance trompeuse</li>
+                        <li><strong>Dénigrement</strong> : dévaluer les produits concurrents</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Le cas Sony vs Subsonic (2022)</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 0.8rem 0; color: #1a1a1a;">
+                        <strong style="color: #d84a51;">Sony a poursuivi Subsonic</strong>
+                    </p>
+                    <p style="text-align: left; margin: 1.2rem 0 0 0; font-size: 1.5rem; color: #666;">
+                        Motifs : ressemblance de fonctionnement + contrefaçon de brevet
+                    </p>
+                    <p style="text-align: left; margin: 1.3rem 0 0 0; font-size: 1.6rem; color: #1a1a1a;">
+                        <strong style="color: #68ff6b;">Résultat : rejet de la plainte</strong>
+                    </p>
+                    <p style="text-align: left; margin: 0.9rem 0 0 0; font-size: 1.4rem; color: #666;">
+                        Raison : preuves insuffisantes et non concrètes
+                    </p>
+                </div>
+            </section>
+
+            <!-- ===== QUESTION 4 ===== -->
+            <section>
+                <div class="section-number">4</div>
+                <h2>Recours juridiques</h2>
+                <p style="color: #666; font-size: 1.5rem; margin: 1rem 0 0 0;">Subsonic contre les manœuvres
+                    anticoncurrentielles</p>
+            </section>
+
+            <section>
+                <h3>Actions possibles pour Subsonic</h3>
+                <div class="content-box">
+                    <div style="text-align: left; margin-bottom: 1.4rem;">
+                        <p style="font-size: 1.4rem; margin: 0 0 0.7rem 0; color: #1a1a1a;">
+                            🟦 <strong>Saisir l'Autorité de la concurrence (France)</strong>
+                        </p>
+                        <p style="font-size: 1.3rem; color: #666; margin: 0;">
+                            Article L.420-2 du Code du commerce
+                        </p>
+                    </div>
+                    <div style="text-align: left;">
+                        <p style="font-size: 1.4rem; margin: 0 0 0.7rem 0; color: #1a1a1a;">
+                            🟦 <strong>Saisir la Commission européenne</strong>
+                        </p>
+                        <p style="font-size: 1.3rem; color: #666; margin: 0;">
+                            Article 102 du Traité UE
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Décision de l'Autorité de concurrence</h3>
+                <div class="content-box victory-box">
+                    <p style="text-align: center; font-size: 1.7rem; margin: 0; color: #1a1a1a;">
+                        <strong>Décision n°23-D-14</strong>
+                    </p>
+                    <p style="text-align: center; font-size: 1.5rem; color: #666; margin: 0.9rem 0 0 0;">
+                        20 décembre 2023
+                    </p>
+                    <p
+                        style="text-align: center; font-size: 2.4rem; color: #68ff6b; margin: 1.6rem 0 0 0; font-weight: 800;">
+                        13 527 000€ d'amende
+                    </p>
+                    <p style="text-align: center; font-size: 1.4rem; color: #666; margin: 0.9rem 0 0 0;">
+                        Contre Sony (filières : JP, EU, FR)
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Autorité de la concurrence</h3>
+                <div class="content-box">
+                    <p style="text-align: left; margin: 0 0 1.2rem 0; color: #1a1a1a;">
+                        Autorité administrative <strong>indépendante française</strong>
+                    </p>
+                    <ul class="list-inline" style="margin: 0;">
+                        <li>Contrôle le respect des règles de concurrence</li>
+                        <li>Traite les pratiques anticoncurrentielles</li>
+                        <li>Instance de recours pour les entreprises</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- CONCLUSION -->
+            <section>
+                <h2>En résumé</h2>
+                <div class="content-box">
+                    <ul class="list-inline">
+                        <li style="font-size: 1.6rem;"><strong>Marque</strong> • <strong>Design</strong> •
+                            <strong>Brevet</strong> = triple protection
+                        </li>
+                        <li style="font-size: 1.6rem;">Licence officielle = seul chemin légal</li>
+                        <li style="font-size: 1.6rem;">Contrefaçon = exploitation non autorisée</li>
+                        <li style="font-size: 1.6rem;">Recours : Autorité de compétition</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- MERCI -->
+            <section>
+                <h1 style="font-size: 4.5rem; color: #186db4; margin-bottom: 2.5rem; line-height: 1.2;">Merci !</h1>
+                <p style="font-size: 2.2rem; margin-top: 3rem; color: #666; line-height: 1.5;">Questions ?</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            controls: true,
+            progress: true,
+            center: true,
+            slideNumber: true,
+            overview: true,
+            keyboard: true,
+            touch: true,
+            plugins: [RevealNotes],
+            width: '100%',
+            height: '100%',
+            margin: 0.05,
+            minScale: 0.5,
+            maxScale: 2
+        });
+    </script>
+</body>
+
+</html>

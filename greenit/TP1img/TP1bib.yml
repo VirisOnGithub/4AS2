@@ -1,0 +1,41 @@
+ref:
+  type: Web
+  title: "Référentiel Eco-conception: les 115 bonnes pratiques"
+  author: "Collectif GreenIT"
+  url: https://collectif.greenit.fr/ecoconception-web/115-bonnes-pratiques-eco-conception_web.html
+
+techstack: 
+  type: Web
+  title: "Find out what websites are built with"
+  author: "Ful.io"
+  url: https://ful.io/domain/sodastream.com
+
+sodaecoindex:
+  type: Web
+  title: "Analyse Sodastream.com | EcoIndex"
+  url: https://www.ecoindex.fr/resultat/?id=bf35a287-e738-4609-86cd-d1d73529d01c
+
+sodaecograder:
+  type: Web
+  title: "Analyse Sodastream.com | EcoGrader"
+  url: https://ecograder.com/report/1foC2ldbuhdRQDvgkoI8rv7T
+
+sodawebsitecarbon:
+  type: Web
+  title: "Analyse Sodastream.com | Website Carbon"
+  url: https://www.websitecarbon.com/website/sodastream-com/
+
+newecoindex:
+  type: Web
+  title: "Analyse sodastream.clement-reniers.fr | EcoIndex"
+  url: https://www.ecoindex.fr/resultat/?id=7da1a98f-e561-4644-beda-a817f06d867b
+
+newecograder:
+  type: Web
+  title: "Analyse sodastream.clement-reniers.fr | EcoGrader"
+  url: https://ecograder.com/report/BtKwxLubZHtY2ARqlCTvI0dh
+
+newwebsitecarbon:
+  type: Web
+  title: "Analyse sodastream.clement-reniers.fr | Website Carbon"
+  url: https://www.websitecarbon.com/website/sodastream-clement-reniers-fr/

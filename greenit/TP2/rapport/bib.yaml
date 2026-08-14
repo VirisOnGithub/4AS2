@@ -1,0 +1,12 @@
+iso:
+  type: web
+  url: https://www.iso.org/fr/standard/14001
+  title: "ISO 14001 : Version 2026"
+autocad:
+  type: web
+  url: https://www.autodesk.com/fr/products/autocad/overview
+  title: "AutoCAD : présentation du produit"
+ur10e:
+  type: web
+  url: https://unchainedrobotics.de/fr/products/robot/cobot/universal-robots-ur10e
+  title: "Cobot UR10e : caractéristiques techniques"

@@ -9,9 +9,10 @@ interface Props {
 	imgOffsetX?: string;
 	imgOffsetY?: string;
 	imgScale?: string;
+	link?: string;
 }
 
-const { title, subtitle, buttonText, imageSrc, bgColor, btnTextColor, imgOffsetX, imgOffsetY, imgScale } = Astro.props;
+const { title, subtitle, buttonText, imageSrc, bgColor, btnTextColor, imgOffsetX, imgOffsetY, imgScale, link } = Astro.props;
 
 const addPxIfUnitless = (value?: string) => {
 	if (!value || value.trim() === "") return "0px";
@@ -33,7 +34,7 @@ const scale = imgScale
 	<div class="bottom-card-content">
 		<h3 class="bottom-card-title">{title}</h3>
 		<p class="bottom-card-subtitle">{subtitle}</p>
-		<button class="bottom-card-button" style={`color: ${btnTextColor || '#fff'};`}>{buttonText}</button>
+		<a href={link} class="bottom-card-button" style={`color: ${btnTextColor || '#fff'};`}>{buttonText}</a>
 	</div>
 	<div class="bottom-card-image-box">
 		<img src={imageSrc} alt={title} class="bottom-card-img" style={`transform: translate(${offsetX}, ${offsetY}) scale(${scale});`} />

@@ -1,0 +1,42 @@
+Niveau;Code;Catégorie;Famille_métier;Intitulé
+1;1A;Employé;Accueil / administratif;Agent d’accueil, opérateur de saisie
+1;1B;Employé;Gestion simple;Assistant gestion, agent administratif
+1;1C;Employé;Prestations;Agent prestations débutant
+1;1D;Employé;Recouvrement / relation adhérents;Assistant recouvrement
+1;1E;Employé;RH / logistique;Assistant RH, agent logistique
+1;1F;Employé;Comptabilité;Aide-comptable
+1;1G;Employé;Relation clients;Téléconseiller débutant
+1;1H;Employé;Informatique;Support N1
+1;1I;Employé;Santé / médico-social;Assistant médical administratif
+1;1L;Employé;Exploitation / production;Opérateur de traitement flux
+1;1O;Employé;Divers;Emplois non repérés
+1;1P;Employé;Prestations;Agent administratif prestations
+2;2A;Technicien;Prestations;Gestionnaire prestations
+2;2B;Technicien;Relation assurés;Conseiller adhérents
+2;2C;Technicien;Recouvrement;Technicien recouvrement
+2;2G;Technicien;Informatique;Technicien support N2
+2;2H;Technicien;Comptabilité;Comptable junior
+2;2I;Technicien;RH;Assistant RH confirmé
+2;2J;Technicien;Juridique;Assistant juridique
+2;2K;Technicien;Santé / social;Coordinateur santé
+2;2O;Technicien;Numérique;Opérateur systèmes
+3;3K;Cadre;Informatique;Analyste, développeur
+3;3L;Cadre;Prestations;Référent prestations
+3;3M;Cadre;Assurance;Chargé d'études
+3;3N;Cadre;RH;Gestionnaire RH confirmé
+3;3O;Cadre;Juridique;Juriste
+3;3P;Cadre;Recouvrement;Cadre recouvrement
+3;3S;Cadre;Comptabilité;Cadre comptable
+4;4I;Cadre sup;Informatique;Chef de projet SI
+4;4J;Cadre sup;RH;Responsable RH
+4;4K;Cadre sup;Comptabilité;Responsable comptable
+4;4L;Cadre sup;Prestations;Responsable prestations
+4;4N;Cadre sup;Relation client;Responsable CRC
+4;4O;Cadre sup;Juridique;Responsable juridique
+4;4P;Cadre sup;Assurance / stratégie;Responsable risques, pôle assurance
+4;4W;Cadre sup;Divers;Responsable transversal
+4;4X;Cadre sup;Numérique;Responsable architecture
+5;5Q;Direction;Pôle gestion;Directeur prestations / directeur opérationnel
+5;5R;Direction;Comptabilité / finance;Directeur financier
+5;5S;Direction;RH;DRH
+5;5T;Direction;Informatique;DSI

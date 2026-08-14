@@ -1,0 +1,71 @@
+.plateau {
+	width: 512px;
+	display: block;
+	border: solid 2px black;
+}
+.plateau p {
+	margin: 0;
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+	background-color: white;
+}
+
+.plateau p.noir {
+	background-color: #889;	
+}
+
+.plateau i {
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	background-image: url('Chess_symbols.PNG');
+}
+
+i.pion.blanc {
+ background-position: -314px 0;
+}
+
+i.pion.noir {
+ background-position: -314px -64px; 
+}
+
+i.tour.blanc {
+ background-position: -128px 0;
+}
+
+i.tour.noir {
+ background-position: -128px -64px; 
+}
+
+i.cavalier.blanc {
+ background-position: -254px 0;
+}
+
+i.cavalier.noir {
+ background-position: -254px -64px; 
+}
+
+i.fou.blanc {
+ background-position: -190px 0;
+}
+
+i.fou.noir {
+ background-position: -190px -64px; 
+}
+
+i.dame.blanc {
+ background-position: -64px 0;
+}
+
+i.dame.noir {
+ background-position: -64px -64px; 
+}
+
+i.roi.blanc {
+ background-position: -2px 0;
+}
+
+i.roi.noir {
+ background-position: -2px -64px; 
+}

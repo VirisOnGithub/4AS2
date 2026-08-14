@@ -1,4 +1,4 @@
-#import "../template/src/polytech.typ": *
+#import "@local/polytech:1.0.0": *
 
 #show: conf(doctitle: "TD - Programmation linéaire", subject: "Optimisation discrète", theme: blue)[
   #titlepage(authors: "Clément RENIERS")
@@ -109,7 +109,7 @@
 
   = Exercice 4
   1.
-    #rounded-image(image("/assets/image-8.png"))
+    #rounded-image(image("assets/image-8.png"))
 
     On voit bien que l'origine n'est pas une solution de base.
 
@@ -194,5 +194,183 @@
       ),
     )
 
-    Ici on a intérêt à sélectionner $x_5$
+    Ici on a intérêt à sélectionner $x_5$ :
+
+    1. parce qu'on a le graphique
+    2. parce qu'on a rendu $x_1$ non nul l'étape d'avant donc on est sur l'axe des abscisses, donc si on le rend nul à nouveau, on va switcher d'axe, et on a rarement inrérêt à le faire.
+
+    On choisit $x_3$ comme variable à faire sortir de la base (on a $5/1 = 5$ qui est le plus petit résultat positif)
+
+    #rounded-table(
+      ("", $x_1$, $x_2$, $x_3$, $x_4$, $x_5$, ""),
+      (
+        ($x_5$, "0", "0", "1", "0", "1", "5"),
+        ($x_4$, "0", "1", "0", "1", "0", "3"),
+        ($x_1$, "1", "1", "1", "0", "0", "6"),
+        ("z", "0", "1", "-1", "0", "0", "-6"),
+      ),
+    )
+
+    Puis,
+
+    #rounded-table(
+      ("", $x_1$, $x_2$, $x_3$, $x_4$, $x_5$, ""),
+      (
+        ($x_5$, "0", "0", "1", "0", "1", "5"),
+        ($x_2$, "0", "1", "0", "1", "0", "3"),
+        ($x_1$, "1", "0", "1", "-1", "0", "3"),
+        ("z", "0", "0", "-1", "-1", "0", "-9"),
+      ),
+    )
+
+    Ainsi, on a bien la solution $z = 9$
+
+  = Exercice 5
+
+  1. On définit
+
+  - $x_1$ le nombre de premiers lots achetés
+  - $x_2$ le nombre de seconds lots achetés
+
+  $
+    cases(3x_1 + 3x_2 >= 21, 5x_1 + x_2 >= 20, 3x_1 + x_2 >= 15, z = 50x_1 + 36x_2 "à minimiser")
+  $
+
+  2. Écrivons le dual :
+
+  $
+    cases(3y_1 + 5y_2 + 3y_3 <= 50, 3y_1 + y_2 + y_3 <= 36, z= 21y_1 + 20y_2 + 15y_3 "à maximiser",)
+  $
+
+  Avec les variables d'écart :
+
+  $
+    cases(3y_1 + 5y_2 + 3y_3 #text($+ y_4$, red) = 50, 3y_1 + y_2 + y_3 #text($+ y_5$, red) = 36, z= 21y_1 + 20y_2 + 15y_3 "à maximiser",)
+  $
+
+  On fait le tableau
+
+  #rounded-table(
+    ("", $y_1$, $y_2$, $y_3$, $y_4$, $y_5$, ""),
+    (
+      ($y_4$, "3", "5", "3", "1", "0", "50"),
+      ($y_5$, "3", "1", "1", "0", "1", "36"),
+      ("z", "21", "20", "15", "0", "0", "0"),
+    ),
+  )
+
+  = Exercice 8
+
+  Le programme linéaire est (avec $x_1, x_2 in RR$) :
+
+  $
+    cases(3x_1 + 2x_2 >= 6, 2x_1 + 3x_2 >= 6, x_1 >= 1, z = 2x_1 + x_2 "à minimiser")
+  $
+
+  1.
+
+  #rounded-image(image("assets/image.png"), caption: "Résolution graphique")
+
+  2. Programme dual :
+
+  $
+    cases(3y_1 + 2y_2 + y_3 <= 2, 2y_1 + 3y_2 <= 1, z = 6y_1 + 6y_2 + y_3 "à maximiser")
+  $
+
+  Variables d'écart :
+
+  $
+    cases(3y_1 + 2y_2 + y_3 #text($+ y_4$, red) = 2, 2y_1 + 3y_2 #text($+ y_5$, red) = 1, z = 6y_1 + 6y_2 + y_3 "à maximiser")
+  $
+
+  Méthode du simplexe :
+
+  #rounded-table(
+    ("", $y_1$, $y_2$, $y_3$, $y_4$, $y_5$, ""),
+    (
+      ($y_4$, "3", "2", "1", "1", "0", "2"),
+      ($y_5$, "2", "3", "0", "0", "1", "1"),
+      ("z", "6", "6", "1", "0", "0", "0"),
+    ),
+  )
+
+  - Plus grand coef : $y_1$
+  - Plus petit résultat : $1/2$ pour $y_5$
+
+  #rounded-table(
+    ("", $y_1$, $y_2$, $y_3$, $y_4$, $y_5$, ""),
+    (
+      ($y_4$, "0", "-5/2", "1", "1", "-3/2", "1/2"),
+      ($y_1$, "1", "3/2", "0", "0", "1/2", "1/2"),
+      ("z", "0", "-3", "1", "0", "-3", "-3"),
+    ),
+  )
+
+  - Plus grand coef : $y_3$
+  - Plus petit résultat : $1/1 = 1$ pour $y_4$
+
+  #rounded-table(
+    ("", $y_1$, $y_2$, $y_3$, $y_4$, $y_5$, ""),
+    (
+      ($y_3$, "0", "-5/2", "1", "1", "-3/2", "1/2"),
+      ($y_1$, "1", "3/2", "0", "0", "1/2", "1/2"),
+      ("z", "0", "-1/2", "0", "-1", "-3/2", "-7/2"),
+    ),
+  )
+
+  Ainsi la solution optimale est $x_1 = 1$, $x_2 = 3/2$, $z = 7/2$.
+
+  3.
+
+  Ajout des variables d'écart :
+
+  $
+    cases(3x_1 + 2x_2 #text($- x_3$, red) = 6, 2x_1 + 3x_2 #text($- x_4$, red) = 6, x_1 #text($- x_5$, red) = 1, w = -z = - 2x_1 - x_2 "à maximiser")
+  $
+
+  Ajout des variables artificielles :
+
+  $
+    cases(3x_1 + 2x_2 #text($- x_3$, red) #text($+ x_6$, blue) = 6, 2x_1 + 3x_2 #text($- x_4$, red) #text($+ x_7$, blue) = 6, x_1 #text($- x_5$, red) #text($+ x_8$, blue) = 1, w = -z = - 2x_1 - x_2 "à maximiser")
+  $
+
+  $
+     z' & = x_6 + x_7 + x_8 "à minimiser" \
+    z'' & = -z' = -(x_6 + x_7 + x_8) \
+        & = -x_6 - x_7 - x_8 "à maximiser" \
+        & = 3x_1 + 2x_2 - x_3 - 6 + 2x_1 + 3x_2 - x_4 - 6 + x_1 - x_5 - 1 \
+        & = 6x_1 + 5x_2 - x_3 - x_4 - x_5 - 13
+  $
+
+  #rounded-table(
+    ("", $x_1$, $x_2$, $x_3$, $x_4$, $x_5$, $x_6$, $x_7$, $x_8$, ""),
+    (
+      ($x_6$, "3", "2", "-1", "0", "0", "1", "0", "0", "6"),
+      ($x_7$, "2", "3", "0", "-1", "0", "0", "1", "0", "6"),
+      ($x_8$, "1", "0", "0", "0", "-1", "0", "0", "1", "1"),
+      ("z''", "6", "5", "-1", "-1", "-1", "0", "0", "0", "-13"),
+    ),
+  )
+
+  = Exercice 6
+
+  PLNE :
+
+  $
+    cases(-x_1 + 2x_2 <= 5, x_1 + 2x_2 <= 14, x_1 <= 8, z = 10x_1 + 50x_2)
+  $
+
+  On rajoute les variables d'écart :
+
+  $
+    cases(-x_1 + 2x_2 #text($+ x_3$, red) = 5, x_1 + 2x_2 #text($+ x_4$, red) = 14, x_1 #text($+ x_5$, red) = 8, z = 10x_1 + 50x_2)
+  $
+
+  La solution c'est $x_1 = 4.5, x_2 = 4.75$
+
+  #rounded-image(image("assets/PLNE.png"))
+
+  = Exercice 7
+
+  #rounded-image(image("assets/image-1.png"), size: 80%)
 ]

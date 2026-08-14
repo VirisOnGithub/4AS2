@@ -9,9 +9,10 @@ interface Props {
 	imgOffsetX?: string;
 	imgOffsetY?: string;
 	imgScale?: string;
+	link?: string;
 }
 
-const { title, subtitle, buttonText, imageSrc, bgColor, circleColor, imgOffsetX, imgOffsetY, imgScale } = Astro.props;
+const { title, subtitle, buttonText, imageSrc, bgColor, circleColor, imgOffsetX, imgOffsetY, imgScale, link } = Astro.props;
 
 const addPxIfUnitless = (value?: string) => {
 	if (!value || value.trim() === "") return "0px";
@@ -64,7 +65,7 @@ const mediumCircleOffsetX = Math.cos(mediumBubblesAngle) * (bigCircleSize / 2 + 
 	<div class="top-card-content">
 		<h3 class="top-card-title"><slot name="title" /></h3>
 		<p class="top-card-subtitle">{subtitle}</p>
-		<button class="top-card-button">{buttonText}</button>
+		<a class="top-card-button" href={link} target="_blank" rel="noopener noreferrer">{buttonText}</a>
 	</div>
 </div>
 
@@ -184,5 +185,10 @@ const mediumCircleOffsetX = Math.cos(mediumBubblesAngle) * (bigCircleSize / 2 + 
 
 	.top-card-button:hover {
 		background-color: white;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
 	}
 </style>

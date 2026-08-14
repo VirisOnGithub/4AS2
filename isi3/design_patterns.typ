@@ -1,4 +1,4 @@
-#import "../template/src/polytech.typ": *;
+#import "@local/polytech:1.0.0": *;
 
 #let principia(..content) = grid(
   columns: (1fr, 1fr),
@@ -21,7 +21,7 @@
 
       => Utilisable quand on a plusieurs variantes d'un algorithme.
 
-      => Au contraire du pattern State, on change de stratégie de manière explicite. Les stratégies ne sont pas liées à un état de l'application.
+      => Au contraire du pattern #link("#État", "État"), on change de stratégie de manière explicite. Les stratégies ne sont pas liées à un état de l'application.
     ],
     rounded-image(image("/assets/image-1.png"), caption: "Utilisation simple du pattern Stratégie"),
   )
@@ -510,4 +510,134 @@
           System.out.println(circle.accept(debugVisitor)); // Affiche les informations du cercle
       }
   ```
+
+  #pagebreak()
+  = Composite
+
+  === Principe
+
+  #principia(
+    [
+      => Permet de traiter de manière uniforme des objets individuels et des compositions d'objets.
+
+      => Utilisé pour les systèmes de fichiers, les interfaces graphiques, etc.
+
+      => Permet de construire des structures d'objets en forme d'arbre.
+    ],
+    rounded-image(image("assets/image-8.png"), caption: "Utilisation simple du pattern Composite"),
+  )
+
+  === Exemple (Interface graphique)
+
+  Dans une interface graphique, on peut avoir une classe `Container` qui contient plusieurs autres éléments graphiques (boutons, champs de texte, rectangles, ...). Le pattern Composite permet de traiter les éléments individuels et les conteneurs de manière uniforme, en utilisant une interface commune.
+
+  #grid(
+    columns: (1fr, 1fr),
+    column-gutter: 40pt,
+    ```java
+    public interface Graphic {
+        void draw();
+    }
+
+    public class Button implements Graphic {
+        @Override
+        public void draw() {
+            System.out.println("Drawing a button");
+        }
+    }
+
+    public class TextField implements Graphic {
+        @Override
+        public void draw() {
+            System.out.println("Drawing a text field");
+        }
+    }
+    ```,
+    ```java
+    public class Container implements Graphic {
+        private List<Graphic> children = new ArrayList<>();
+
+        public void add(Graphic graphic) {
+            children.add(graphic);
+        }
+
+        public void remove(Graphic graphic) {
+            children.remove(graphic);
+        }
+
+        @Override
+        public void draw() {
+            System.out.println("Drawing a container");
+            for (Graphic child : children) {
+                child.draw();
+            }
+        }
+    }
+    ```,
+  )
+
+  Ici, la classe `Container` peut contenir d'autres `Graphic`, qui peuvent être des `Button`, des `TextField`, ou même d'autres `Container`. Lorsqu'on appelle la méthode `draw()` sur un `Container`, elle dessine le conteneur lui-même, puis appelle la méthode `draw()` de tous ses enfants, ce qui permet de dessiner toute la hiérarchie d'éléments graphiques de manière uniforme.
+
+  #pagebreak()
+  = Itérateur
+
+  === Principe
+
+  #principia(
+    [
+      => Parcours des éléments d'une collection sans exposer sa structure interne.
+
+      => Utilisé pour les collections, les arbres, etc.
+    ],
+    rounded-image(image("assets/image-9.png"), caption: "Principe du design pattern Itérateur"),
+  )
+
+  === Exemple (Bibliothèque)
+
+  #grid(
+    columns: (1fr, 1fr),
+    column-gutter: 40pt,
+    [```java
+      public record Book(String title, String author) {}
+
+      public class Library implements BookCollection {
+          private List<Book> books = new ArrayList<>();
+
+          @Override
+          public void addBook(Book book) {
+              books.add(book);
+          }
+
+          @Override
+          public Iterator<Book> createIterator() {
+              return new BookIterator(books);
+          }
+      }
+      ```
+      ```java
+
+      ```],
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            Library library = new Library();
+            library.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald"));
+            library.addBook(new Book("To Kill a Mockingbird", "Harper Lee"));
+
+            Iterator<Book> iterator = library.createIterator();
+            while (iterator.hasNext()) {
+                Book book = iterator.next();
+                System.out.println(book.getTitle() + " by " + book.getAuthor());
+            }
+        }
+    }
+    ```,
+  )
+
+
+  #pagebreak()
+  = Façade
+
+  #pagebreak()
+  = Template
 ]

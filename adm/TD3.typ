@@ -1,4 +1,4 @@
-#import "../template/src/polytech.typ": *;
+#import "@local/polytech:1.0.0": *;
 
 #show: conf(doctitle: "ADM - TD2", subject: "ADM", theme: rgb(150, 150, 30))[
   #titlepage(authors: "Clément RENIERS")

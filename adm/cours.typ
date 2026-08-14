@@ -1,4 +1,4 @@
-#import "../template/src/polytech.typ": *
+#import "@local/polytech:1.0.0": *
 
 #show "=>": $=>$
 

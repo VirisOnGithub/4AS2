@@ -1,4 +1,4 @@
-#let conf(theme: none, doctitle: none, subject: none, it) = {
+#let conf(theme: blue, doctitle: none, subject: none, raw_nb_gutter: -1em, it) = {
   let default-theme = if (theme != none) { theme.rgb() } else { luma(200).rgb() }
   state("theme", default-theme).update(default-theme)
 
@@ -16,20 +16,24 @@
   show cite: set text(fill: default-theme)
 
   show raw.where(block: true): it => {
-    set par(justify: false)
-    grid(
-      columns: (100%, 100%),
-      column-gutter: -100%,
-      place(
-        block(width: 100%, inset: 1em, for (i, line) in it.text.split("\n").enumerate() {
-          box(width: 0pt, align(right, text(str(i + 1) + h(2em), fill: theme)))
-          hide(line)
-          linebreak()
-        }),
-        dx: -measure("0").width - 1em,
-      ),
-      block(radius: 1em, fill: luma(246), width: 100%, inset: 1em, it),
-    )
+    if it.lang != "mermaid" {
+      set par(justify: false)
+      grid(
+        columns: (100%, 100%),
+        column-gutter: -100%,
+        place(
+          block(width: 100%, inset: 1em, for (i, line) in it.text.split("\n").enumerate() {
+            box(width: 0pt, align(right, text(str(i + 1) + h(2em), fill: theme)))
+            hide(line)
+            linebreak()
+          }),
+          dx: -measure("0").width + raw_nb_gutter,
+        ),
+        block(radius: 1em, fill: luma(246), width: 100%, inset: 1em, it),
+      )
+    } else {
+      it
+    }
   }
 
   set document(title: doctitle)
@@ -57,7 +61,7 @@
   outline(title: text("Table des matières", fill: black))
 )
 
-#let titlepage(logo: none, authors: none) = {
+#let titlepage(logo: none, authors: none, toc: true, pb_before: true, pb_after: true, content: none) = {
   if (logo != none) {
     align(right, box(width: 80pt, logo))
     v(5em)
@@ -77,13 +81,19 @@
     ]
   }
 
-  if (logo != none) {
+  content
+
+  if (logo != none and pb_before) {
     pagebreak()
   }
 
-  tableofcontents
+  if (toc) {
+    tableofcontents
+  }
 
-  pagebreak()
+  if (pb_after) {
+    pagebreak()
+  }
 }
 
 #let rounded-table(header, content) = align(center)[
@@ -96,16 +106,18 @@
         top: if y > 0 { color },
         left: if x > 0 { color },
       ),
-      table.header(..header.map(h => text(weight: 700, h))),
-      ..content.flatten()
+      table.header(..header.map(h => text(weight: 700, [#h]))),
+      ..content.flatten().map(c => [#c])
     ))
   }
 ]
 
-#let rounded-image(image_file, caption: none, size: 100%) = {
+#let rounded-image(image_file, caption: none, size: 100%, supplement: auto, kind: auto) = {
   context figure(
     caption: caption,
     gap: 1em,
+    supplement: supplement,
+    kind: kind,
   )[
     #rect(box(image_file, radius: 7pt, clip: true), stroke: state("theme", luma(200)).get(), radius: 10pt, width: size)
   ]

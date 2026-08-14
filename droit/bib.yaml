@@ -1,0 +1,33 @@
+concu: 
+  type: web
+  title: "Décision de l'Autorité de la concurrence du 20 décembre 2023"
+  page_total: 91
+  url: https://www.autoritedelaconcurrence.fr/sites/default/files/integral_texts/2023-12/23d14.pdf
+art420:
+  type: web
+  title: "Article L.420-2 du Code de commerce"
+  url: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038725501
+art102:
+  type: web
+  title: "Article 102 du Traité sur le fonctionnement de l'Union européenne"
+  url: https://resume.uni.lu/story/article-102-du-traite-sur-le-fonctionnement-de-lunion-europeenne-tfue
+licence:
+  type: web
+  title: "Licence de droit d'auteur"
+  url: https://direct.playstation.com/en-us/official-licensed-products
+inpi:
+  type: web
+  title: "Déposer un brevet : mode d'emploi"
+  url: https://www.economie.gouv.fr/entreprises/developper-son-entreprise/innover-et-numeriser-son-entreprise/deposer-un-brevet-mode-demploi#d-poser-un-brevet-combien-a-co-t_3
+oeb:
+  type: web
+  title: Combien coûte un brevet européen ?
+  url: https://www.epo.org/fr/service-support/faq/demander-un-brevet/taxes-et-couts/combien-coute-un-brevet-europeen
+pct: 
+  type: web
+  title: PCT – Le système international des brevets
+  url: https://www.wipo.int/fr/web/pct-system
+deloy22:
+  type: web
+  title: 9 septembre 2022 Cour d'appel de Paris RG n° 20/12901
+  url: https://www.courdecassation.fr/decision/631c2b11bd7923fcb00af9fa
